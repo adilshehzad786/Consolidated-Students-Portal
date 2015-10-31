@@ -1,0 +1,87 @@
+from django.db import models
+# from portal import Course
+from Students.models import Record
+
+class AttendanceDaily(models.Model):
+	coursecode = models.ForeignKey('portal.Course')
+	rollno = models.ForeignKey('Students.Student')
+	date = models.DateField(auto_now=False, auto_now_add=False)
+	present = models.BooleanField()
+
+	def __unicode__(self):
+		return str(self.coursecode) + " - " + str(self.rollno) + " - " + str(self.date) + " - " + str(self.present)
+
+	def getCourse(self):
+		return Course.objects.filter(id = self.coursecode)
+
+	def getStudent(self):
+		return self.rollno
+
+	def getAttendancePercentage(self):
+		One = AttendanceDaily.objects.filter(present=True, coursecode=self.coursecode,rollno=self.rollno)
+		num = len(One)
+		total = 0
+		Two = AttendanceMonthly.objects.filter(coursecode=self.coursecode)
+		for record in Two:
+			total+= record.classes_taken_place
+		if total == 0:
+			return 0
+		else:
+			return (num/total) * 100
+
+	def save(self, *args, **kwargs):
+		student = Record.objects.filter(rollno=self.rollno,coursecode=self.coursecode)
+		if student:
+			student = student[0]
+			student.attendance_percentage = self.getAttendancePercentage()
+			student.save(update_fields=['attendance_percentage'])
+		super(AttendanceDaily, self).save(*args, **kwargs)
+
+class AttendanceMonthly(models.Model):
+	coursecode = models.ForeignKey('portal.Course')
+	start_date = models.DateField(auto_now=False, auto_now_add=False)
+	end_date = models.DateField(auto_now=False, auto_now_add=False)
+	classes_taken_place = models.IntegerField()
+
+	def __unicode__(self):
+		return unicode(self.coursecode) + " : " + str(self.start_date) + " - " + str(self.end_date) + " Classes Taken Place: " + str(self.classes_taken_place)
+
+	def getCourse(self):
+		return Course.objects.filter(id = coursecode)
+
+	def getAttendancePercentage(self,rollno):
+		One = AttendanceDaily.objects.filter(present=True, coursecode=self.coursecode,rollno=rollno)
+		num = len(One)
+		total = 0
+		Two = AttendanceMonthly.objects.filter(coursecode=self.coursecode)
+		for record in Two:
+			total+= record.classes_taken_place
+		if total == 0:
+			return 0
+		else:
+			hello = (((float)(num))/total) * 100
+			return hello
+
+	def save(self, *args, **kwargs):
+		# student = self.getStudent()
+		# student.attendance_percentage = student.getAttendancePercentage()
+		student = Record.objects.filter(coursecode=self.coursecode)
+		for stud in student:
+			stud.attendance_percentage = self.getAttendancePercentage(stud.rollno)
+			stud.save(update_fields=['attendance_percentage'])
+		super(AttendanceMonthly, self).save(*args, **kwargs)
+
+class AdminStaff(models.Model):
+	name = models.CharField(max_length=50)
+	designation = models.CharField(max_length=100)
+	username = models.ForeignKey('portal.EmailUser',to_field = 'email',unique=True)
+
+	def __unicode__(self):
+		return str(self.username)
+
+class Document(models.Model):
+	docfile = models.FileField(upload_to='documents/%Y/%m/%d')
+
+class Document1(models.Model):
+	docfile = models.FileField(upload_to='documents/%Y/%m/%d')
+

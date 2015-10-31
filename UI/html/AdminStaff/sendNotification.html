@@ -1,0 +1,141 @@
+<html>
+<head>
+	<title>Courses</title>
+	<link rel="stylesheet" type="text/css" href="../../css/foundation.min.css">
+	<link rel="stylesheet" type="text/css" href="../../css/reports.css">
+	<!-- <link rel="stylesheet" type="text/css" href="../../css/notable.css"> -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/foundation.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#search_bar').hide();
+			$('#search_click').click(function(){
+				$('#search_bar').slideToggle();
+			});
+		});
+	</script>
+</head>
+<body>
+	<nav class="top-bar" data-topbar role="navigation">
+	  <ul class="title-area">
+	    <li class="name">
+	      <h1><a href="#">Name</a></h1>
+	    </li>
+	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	  </ul>
+	  <section class="top-bar-section">
+	    <ul class="right">
+	  	  <li class="active"><a href="index.html">Home</a></li>   
+	      <li><a href="courses.html">Courses</a></li>
+	      <li><a href="../Reports/index.html">Reports</a></li>
+	      <li id="search_click"><a href="#">Search</a></li>
+	      <li><a href="#">Logout</a></li>   
+	  </section>
+	</nav>
+	<div class="container" id="search_bar" style="background-color:#444;">
+		<div class="row">
+			<div class="large-10 columns">
+				<input style="margin-top:13px;" type="text" placeholder="Search...">
+			</div>
+			<div class="large-2 columns">
+				<a href="#" style="margin-top:10px;" class="button small">Search</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" style="margin-top:30px;">
+		<div class="large-6 columns">
+			<h3>View Feedback:</h3>
+			<table>
+				 <thead>
+				    <tr>
+				      <th width="100">From</th>
+				      <th width="100">Subject</th>
+				      <th width="400">Message</th>
+				    </tr>
+				  </thead>
+				<tbody>
+					<!-- <tr>
+						<td>From:</td>
+						<td>Name goes here.</td>
+					</tr>
+					<tr>
+						<td>Subject:</td>
+						<td>Subject goes here.</td>
+					</tr>
+					<tr style="border-bottom:1px solid #333;">
+						<td>Message:</td>
+						<td>LONG LONG LONG LONG LONG LONG LONG MESSAGE goes here.</td>
+					</tr> -->
+					<tr>
+						<td>Name goes here.</td>
+						<td>Subject goes here.</td>
+						<td>LONG LONG LONG LONG LONG LONG LONG MESSAGE goes here.</td>
+					</tr>
+					<tr>
+						<td>Name goes here.</td>
+						<td>Subject goes here.</td>
+						<td>LONG LONG LONG LONG LONG LONG LONG MESSAGE goes here.</td>
+					</tr>
+					<tr>
+						<td>Name goes here.</td>
+						<td>Subject goes here.</td>
+						<td>LONG LONG LONG LONG LONG LONG LONG MESSAGE goes here.</td>
+					</tr>
+					<tr>
+						<td>Name goes here.</td>
+						<td>Subject goes here.</td>
+						<td>LONG LONG LONG LONG LONG LONG LONG MESSAGE goes here.</td>
+					</tr>
+					<tr>
+						<td>Name goes here.</td>
+						<td>Subject goes here.</td>
+						<td>LONG LONG LONG LONG LONG LONG LONG MESSAGE goes here.</td>
+					</tr>
+				</tbody>
+			</table>
+		
+		</div>
+		<div class="large-6 columns">
+			<h3>Send Notifications:</h3>			  
+			  <div class="row">
+			    <div class="large-12 columns">
+			      <label>To:
+			        <textarea placeholder="small-12.columns" rows="5"></textarea>
+			      </label>
+			    </div>
+			  </div>  
+			  <div class="row">
+			    <div class="large-12 columns">
+			      <label>Message
+			        <textarea placeholder="small-12.columns" rows="20"></textarea>
+			      </label>
+			    </div>
+			  </div>
+			  <div class="row">
+			    <div class="large-12 columns">
+			      <label>
+			      <a href="#" class="button">Send</a>
+			      </label>
+			    </div>
+			  </div>
+			  </div>
+		</div>
+		<div class="footer" style="bottom:0px;position:fixed;width: 100%;margin-top:10px;" >
+     <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+      <section class="top-bar-section"> <!-- Right Nav Section --> 
+        <ul class="right">
+      <li><a href="#">Courses</a></li>
+       <li> | </li>
+      <li><a href="#">ISAS</a></li>
+       <li> | </li>
+      <li><a href="#">Student's Mail</a></li>
+       <li> | </li>
+      <li><a href="#">IIIT Homepage</a></li>
+        </ul> <!-- Left Nav Section --> 
+      </section>
+    </nav>
+  </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/foundation.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/reports.css" %}">
+    <script type="text/javascript" src="{% static "js/vendor/jquery.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/foundation.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/vendor/modernizr.js" %}"></script>
+  </head>
+  <style type="text/css">
+      .container{
+        width: 100%;
+        margin-top: 20px;
+      }
+      .search-result{
+        background-color: #999;
+        padding: 5px;
+        border: 5px solid white;
+      }
+  </style>
+  <body>
+    {% block nav_block %}{% endblock %}
+    <div class="row" style="margin-top:40px;">
+      <h3>Showing results for <span>"{{ search_input }}"</span>:</h3>
+      <div class="large-12 ">
+        <div class="row" style="margin-top:80px;">
+          {% if ListofStudents %}     
+            {% for student in ListofStudents %}
+                 <div class="large-6 columns search-result" style="height:150px;" >
+                    <div class="large-8 columns">
+                      <h4><a href=/{{app}}/viewStudent/{{student.rollno}}>{{ student.name }}</a></h4>
+                      <h4>{{ student.rollno }}</h4>
+                    </div>
+                    <div class="large-4 columns">
+                      {% if student.username.photo %}
+                       <img src="{{ student.username.photo.url }}" style="height:120px">
+                      {% else %}
+                      <img style="height:120px" src="http://blogs.kqed.org/education/files/2011/06/facebook_blank_face3.jpeg" id="circle">
+                      {% endif %}
+                    </div>
+                  </div>
+            {% endfor %}
+          {% else %}
+                  <strong>No results found.</strong>
+          {% endif %}    
+        </div>
+      </div>
+    </div>
+    <div class="footer" style="bottom:0px;position: fixed;width: 100%;" >
+     <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+      <section class="top-bar-section"> <!-- Right Nav Section --> 
+        <ul class="right">
+       <ul class="right">
+        <li><a href=/student/index>Student</a></li>
+         <li> | </li>
+        <li><a href=/parents/>Parent</a></li>
+         <li> | </li>
+        <li><a href=/adminStaff/>Admin Staff</a></li>
+         <li> | </li>
+        <li><a href=/admin/>Admin</a></li>
+         <li> | </li>
+        <li><a href=/faculty/>Faculty</a></li>
+        <li> | </li>
+        <li><a href=/facultystaff/>Faculty Staff</a></li>
+        <li> | </li>
+        <li><a href=/ta/>TA</a></li>
+        </ul> 
+        </ul> <!-- Left Nav Section --> 
+      </section>
+    </nav>
+  </div>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>

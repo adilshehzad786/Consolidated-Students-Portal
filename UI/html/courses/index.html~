@@ -1,0 +1,314 @@
+<html>
+<head>
+<style>
+#thumbnail img{
+width:500px;
+height:500px;
+margin:5px;
+float:right;
+position:absolute;
+right:50px;
+top:120px;
+}
+canvas{
+border:1px solid red;
+}
+</style>
+<title>Students</title>
+		<link rel="stylesheet" type="text/css" href="../../css/foundation.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/foundation.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../js/foundation.min.js"></script>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+</style>
+</head>
+<body>
+	<nav class="top-bar" data-topbar role="navigation">
+		<ul class="title-area">
+			<li class="name">
+			<h1><a href="index.html">Courses </a></h1>
+			</li>
+			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+			</ul>
+			<section class="top-bar-section">
+			<ul class="right">
+<li class="has-form"> <div class="row collapse"> <div class="large-8 small-9 columns"> <input type="text" placeholder="Find Stuff"> </div> <div class="large-4 small-3 columns"> <a href="#" class="button expand">Search</a> </div> </div> </li>
+			<li><a href="../students/tt.html">Home</a></li>
+			<li><a href='../courses/index.html'>Courses</a><li>
+			<li><a href='../courses/feedback.html'>Feed Back</a><li>
+			<li class="active"><a href="#">Profile</a></li>
+			<li><a href="#">Logout</a></li>   
+		</section>
+	</nav>
+	
+	
+	<!--<div>
+	<form action="demo_form.asp">
+	<input type="file" name="pic" accept="image/*">
+	<input type="submit">
+	</form></div>-->
+	
+<h3 align="center"> COURSES PAGE </h3>
+	<p align="center" > Name: </p>
+	<p align="center">Branch: </p>
+      <div class="ee" >
+	
+	
+	
+	
+          <div class="tt">
+	<h4> Grades </h4>
+<table style="width:100%">
+	<tr>
+    <th><a href="#"> Semesters </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+  <tr>
+    <th><a href="#"> Semester-1 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+  <tr>
+    <th><a href="#"> Semester-2 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+  <tr>
+   <th><a href="#"> Semester-3 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+	<tr>
+    <th><a href="#"> Semester-4 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+<tr>
+    <th><a href="#"> Semester-5 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+<tr>
+    <th><a href="#"> Semester-6 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+<tr>
+    <th><a href="#"> Semester-7 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+<tr>
+  <th><a href="#"> Semester-8 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+</table>
+
+
+          </div>
+	
+          <div class =" t1">
+		<h3> courses </h3>
+		<table style="width:100%">
+  <tr>
+    <th><a href="#"> Semester-1 </a></th>
+    <th><a href="#"> Semester-2 </a></th>	
+ <th><a href="#"> Semester-3 </a></th>
+    <th><a href="#"> Semester-4 </a></th>
+ <th><a href="#"> Semester-5 </a></th>
+    <th><a href="#"> Semester-6 </a></th>
+ <th><a href="#"> Semester-7 </a></th>
+    <th><a href="#"> Semester-8 </a></th>	
+    
+  </tr>
+  <tr>
+    <td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>		
+    		<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+  </tr>
+
+  <tr>
+    <td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>		
+    		<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+  </tr>
+
+<tr>
+    <td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>		
+    		<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+  </tr>
+
+<tr>
+    <td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>		
+    		<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+  </tr>
+
+<tr>
+    <td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>		
+    		<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+  </tr>
+
+<tr>
+    <td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>		
+    		<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+  </tr>
+<tr>
+    <td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>		
+    		<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+  </tr>
+
+<tr>
+    <td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>		
+    		<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+  </tr>
+
+<tr>
+    <td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>		
+    		<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+<td><a href="#"> Sub-1 </a></td>
+    <td><a href="#"> Sub-1</a></td>
+  </tr>
+
+</table>
+          </div>
+
+<div class="tt1">
+<h4> Attendance </h4>
+<table style="width:100%">
+	<tr>
+    <th><a href="#"> Semesters </a></th>
+    <td>daily</td>
+	<td>weekly</td>
+<td>monthly</td>
+  </tr>
+  <tr>
+    <th><a href="#"> Semester-1 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+<td>CGPA</td>
+  </tr>
+  <tr>
+    <th><a href="#"> Semester-2 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+<td>CGPA</td>
+  </tr>
+  <tr>
+   <th><a href="#"> Semester-3 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+	<td>CGPA</td>
+  </tr>
+	<tr>
+    <th><a href="#"> Semester-4 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+<tr>
+    <th><a href="#"> Semester-5 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+<tr>
+    <th><a href="#"> Semester-6 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+<tr>
+    <th><a href="#"> Semester-7 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+<tr>
+  <th><a href="#"> Semester-8 </a></th>
+    <td>SGPA</td>
+	<td>CGPA</td>
+  </tr>
+</table>
+          </div>
+            </div>
+  
+      
+  
+          
+<div class="footer" style="bottom:-800px;position:absolute;width: 100%;" >
+     <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+      <section class="top-bar-section"> <!-- Right Nav Section --> 
+        <ul class="right">
+        <li><a href="#">Admin login</a></li>
+      <li> | </li>
+      <li><a href="#">Courses</a></li>
+       <li> | </li>
+      <li><a href="#">ISAS</a></li>
+       <li> | </li>
+      <li><a href="#">Student's Mail</a></li>
+       <li> | </li>
+      <li><a href="#">IIIT Homepage</a></li>
+        </ul> <!-- Left Nav Section --> 
+      </section>
+    </nav>
+  </div>
+     
+	</body>
+</html>

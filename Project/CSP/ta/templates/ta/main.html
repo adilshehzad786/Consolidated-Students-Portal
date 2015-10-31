@@ -1,0 +1,116 @@
+<html>
+<head>
+	{% load staticfiles %}
+	<title>Student's Portal | TA</title>
+	<link rel="stylesheet" type="text/css" href="{% static "css/foundation.min.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "css/reports.css" %}">
+	<script type="text/javascript" src="{% static "js/vendor/jquery.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/foundation.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/foundation/foundation.accordion.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/foundation/foundation.reveal.js" %}"></script>
+	<script>
+  	 	$(document).foundation();
+	</script>
+</head>
+<body>
+	<nav class="top-bar" data-topbar role="navigation">
+	  <ul class="title-area">
+	    <li class="name">
+	      <h1><a href=/ta/>{{current.rollno.name}}</a></h1>
+	    </li>
+	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	  </ul>
+	  <section class="top-bar-section">
+	    <ul class="right">
+	  	  <li class="active"><a href=/TA/>Home</a></li>   
+	      <li><a href=/portal/logout>Logout</a></li>   
+	  </section>
+	</nav>
+	<div>
+
+<script type="text/javascript">
+function sidebarheight()
+      {
+              var x = $(window).height();
+              var y = $('#coursecontent').height();
+              if(x > y)
+              { 
+                 x = x + 50;
+                $('#coursebar').height(x);
+              }
+              else
+              {
+                y = y+50;
+                $('#coursebar').height(y);
+              }
+             
+      }
+      $(document).ready(function(){
+$( window ).resize(function() {
+              //alert("resized");
+                sidebarheight();
+            });
+$( window ).load(function() {
+              //alert("resized");
+                sidebarheight();
+            });
+});
+</script>
+
+<style type="text/css">
+	#coursebar{
+     border-top: 5px solid #555;
+		background-color: #333;
+		padding-top: 75px;
+
+	}
+	#coursebar h3,#coursebar h6,  #coursebar h4 {
+		color: white;
+	}
+</style>
+
+<div class="container">
+	<div class="large-3 columns" id="coursebar">
+		<h3 style="margin-left:20px;">{{current.coursecode.coursecode}} - {{ current.coursecode.coursename }}</h3>
+		<h4 style="margin-left:20px;">TA: {{ current.rollno.name }}</h4>
+		<h4 style="margin-left:20px;">{{ current.coursecode.getCourseDate }}</h4>
+		<h6 style="margin-left:20px;">{{ current.coursecode.course_description}}</h6>
+		<div class="large-12 columns">
+			<a href=/TA/ class="button full small">Home</a>
+			<a href=/TA/updateMarks/{{current.coursecode.pk}} class="button full small">Marks</a>
+			<a href=/TA/updateAttendance/{{current.coursecode.pk}} class="button full small">Attendance</a>
+		</div>
+	</div>
+	<div class="large-9 columns" id="coursecontent" style="margin-top:75px;margin-bottom:100px !important;">
+		{% block body_block %}{% endblock %}
+	</div>
+	</div>
+	<div class="footer" style="bottom:0px;position:fixed;width: 100%;margin-top:10px;right:0px;left:0px;" >
+     <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+      <section class="top-bar-section">
+        <ul class="right">
+	      <li><a href=/student/>Student</a></li>
+	      <li> | </li>
+	      <li><a href=/parents/>Parent</a></li>
+	      <li> | </li>
+	      <li><a href=/adminStaff/>Admin Staff</a></li>
+	      <li> | </li>
+	      <li><a href=/admin/>Admin</a></li>
+	      <li> | </li>
+	      <li><a href=/faculty/>Faculty</a></li>
+	      <li> | </li>
+	      <li><a href=/facultystaff/>Faculty Staff</a></li>
+	      <li> | </li>
+	      <li><a href=/ta/>TA</a></li>
+        </ul> 
+      </section>
+  		</ul>
+    </nav>
+
+	</div>
+	<script>
+  	 	$(document).foundation();
+	</script>
+</body>
+</html>

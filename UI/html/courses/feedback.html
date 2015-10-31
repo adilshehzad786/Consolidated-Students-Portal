@@ -1,0 +1,149 @@
+<html>
+<head>
+<style>
+#thumbnail img{
+width:500px;
+height:500px;
+margin:5px;
+float:right;
+position:absolute;
+right:50px;
+top:120px;
+}
+canvas{
+border:1px solid red;
+}
+</style>
+<title>Students</title>
+		<link rel="stylesheet" type="text/css" href="../../css/foundation.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/faculty.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../js/foundation.min.js"></script>
+</head>
+<body>
+	<nav class="top-bar" data-topbar role="navigation">
+		<ul class="title-area">
+			<li class="name">
+			<h1><a href="feedback.html">Student Feedback </a></h1>
+			</li>
+			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+			</ul>
+			<section class="top-bar-section">
+			<ul class="right">
+<li class="has-form"> <div class="row collapse"> <div class="large-8 small-9 columns"> <input type="text" placeholder="Find Stuff"> </div> <div class="large-4 small-3 columns"> <a href="#" class="button expand">Search</a> </div> </div> </li>
+			<li><a href="../students/tt.html">Home</a></li>
+			<li><a href='../courses/index.html'>Courses</a><li>
+			<li><a href="#">Logout</a></li>   
+		</section>
+	</nav>
+	<div class="row" style="margin-top:40px;">
+	<div class= "large-6 columns">
+		<img style="width:65%;" src="http://www.reverse2bid.com/prodimg/noprofile.jpg">
+		<div class="row">
+			<div class="large-12 columns" style="margin-top:20px;margin-left:70px;">
+				<input type="file" style="display:none" id="upload-image" multiple="multiple"></input>
+				<button id="upload" class="drop-area">
+				Upload Picture
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="container large-6 columns" id='hide'>
+		<h3> Profile </h3>
+		<form>
+			<div class="row">
+			<div class="large-12 columns">
+			<label>Name
+			<input type="text" placeholder="Name" />
+			</label>
+			</div>
+			</div>
+			
+			<div class="row">
+			<div class="large-12 columns">
+			<label>Roll Id
+			<input type="text" placeholder="Roll Id" />
+			</label>
+			</div>
+			</div>
+			<div class="row">
+			<div class="large-12 columns">
+			<label>Phone No
+			<input type="text" placeholder="Phone No" />
+			</label>
+			</div>
+			</div>
+			<div class='row'>
+			<div class="large-12 columns">
+			<div class="row collapse">
+			<label>E-mail</label>
+			<div class="small-8 columns">
+			<input type="text" placeholder="E-mail" />
+			</div>
+			<div class="small-4 columns">
+			<span class="postfix">@students.iiit.ac.in</span>
+			</div>
+			</div>
+			</div>
+			</div>
+			<div class="row">
+				<div class="large-6 columns">
+					<a role="button" class="button expand" aria-label="submit form" href="#" class="Submit">Submit</a>
+				</div>
+				<div class="large-6 columns">
+					<a role="button" class="button expand" aria-label="submit form" href="#" class="Submit">Edit</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!--<div>
+	<form action="demo_form.asp">
+	<input type="file" name="pic" accept="image/*">
+	<input type="submit">
+	</form></div>-->
+	</div>
+
+	<div style="width:20px;height:20px; margin:5px" id="thumbnail"></div>
+	      <div class="row">
+  <div style="position:absolute;left:auto;top:580px;" >
+        <h4 float="left" > Student Feed Back</h4>
+  </div>
+  <hr>
+
+          <div class="row">
+            <div class="large-12 columns">
+              <label> FEED BACK </label>
+              <textarea placeholder="ENTER TEXT "></textarea>
+            </div>
+          </div>
+		<div class="row">
+				<div class="large-6 columns">
+					<a role="button" class="button expand" aria-label="submit form" href="#" class="Submit">Submit</a>
+				</div>
+				<div class="large-6 columns">
+					<a role="button" class="button expand" aria-label="submit form" href="#" class="Submit">Edit</a>
+				</div>
+			</div>
+        </form>
+      </div>     
+<div class="footer" style="bottom:-680px;position:absolute;width: 100%;" >
+     <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+      <section class="top-bar-section"> <!-- Right Nav Section --> 
+        <ul class="right">
+        <li><a href="#">Admin login</a></li>
+      <li> | </li>
+      <li><a href="#">Courses</a></li>
+       <li> | </li>
+      <li><a href="#">ISAS</a></li>
+       <li> | </li>
+      <li><a href="#">Student's Mail</a></li>
+       <li> | </li>
+      <li><a href="#">IIIT Homepage</a></li>
+        </ul> <!-- Left Nav Section --> 
+      </section>
+    </nav>
+  </div>
+     
+	</body>
+</html>

@@ -1,0 +1,225 @@
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students | Profile</title>
+    {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/foundation.min.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "css/reports.css" %}">
+        <script type="text/javascript" src="{% static "js/vendor/jquery.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/foundation.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/vendor/modernizr.js" %}"></script>
+    </head>
+    <body>
+ <nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href=/faculty/>{{current.name}}</a></h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+      <ul class="right">
+        <li class="active"><a href=/student/>Home</a></li>   
+        <li id="search_click"><a>Search</a></li>
+        <li><a href=/portal/logout>Logout</a></li>   
+    </section>
+  </nav>
+
+<div class="container" id="search_bar" style="background-color:#444;">
+  <form action="/student/searchResults/" method="post">
+     {% csrf_token %}
+    <div class="row">
+      <div class="large-10 columns">
+        <input style="margin-top:13px;" name="search_input" type="text" placeholder="Search for a Student by Name or Roll Number">
+      </div>
+        <div class="large-2 columns">
+      <input style="margin-top:10px;" class="button small" type="submit" value="Search"/></div>
+    </div>
+  </form>
+</div>
+        <div class="container">
+            <div class="large-3 columns" id="sidebar">
+                {% if student.username.photo %}
+                                 <img src="{{ student.username.photo.url }}" height="420" id="circle">
+                                {% else %}
+                                <img src="http://blogs.kqed.org/education/files/2011/06/facebook_blank_face3.jpeg" id="circle">
+                                {% endif %}
+               <div class="row">
+                   <div class="large-12 columns">
+                     <label>Name
+                      <p>{{student.name}}</p>
+                     </label>
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="large-12 columns">
+                     <label>Roll Number
+                       <p>{{student.rollno}}</p>
+                     </label>
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="large-12 columns">
+                     <label>Branch
+                         <p>{{student.programme}}</p>
+                     </label>
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="large-12 columns">
+                     <label>Email
+                         <p>{{student.username}}</p>
+                     </label>
+                   </div>
+                 </div>
+            </div>
+               <div class="large-9 columns">
+                <div class="row">
+                    <div class="large-2 columns">
+                        <p></p>
+                    </div>
+                     <div class="large-8 columns" style="margin-top:30px;">
+                        <h3 style="text-align:center;">This profile is private.</h3>
+                        <h4 style="text-align:center;">The owner of this page has made it private.</h4>
+                     </div>
+                      <div class="large-2 columns">
+                        <p></p>
+                      </div>
+                </div>
+               </div>
+            </div>
+            <div>
+  <div>
+    <div class="footer" style="bottom:0px;position:fixed;width: 100%;margin-top:10px;" >
+      <nav class="top-bar" data-topbar role="navigation">
+          <ul class="title-area">
+            <section class="top-bar-section">
+            <ul class="right">
+              <li><a href=/student/>Student</a></li>
+                  <li> | </li>
+                  <li><a href=/parents/>Parent</a></li>
+                  <li> | </li>
+                  <li><a href=/adminStaff/>Admin Staff</a></li>
+                  <li> | </li>
+                  <li><a href=/admin/>Admin</a></li>
+                  <li> | </li>
+                  <li><a href=/faculty/>Faculty</a></li>
+                  <li> | </li>
+                  <li><a href=/facultystaff/>Faculty Staff</a></li>
+                  <li> | </li>
+                  <li><a href=/ta/>TA</a></li>
+            </ul> 
+          </section>
+      </nav>
+    </div>
+  </div>
+              <style type="text/css">
+              #sidebar{
+              background-color: #888;
+              padding-top: 75px;
+                 border-top: 5px solid #555;
+
+              }
+              #sidebar p, #sidebar{
+              color: white;
+
+              }
+              #table2, #table2 tr, #table2 td{
+              color: white !important;
+              background-color: transparent !important;
+              alpha: 0.8;
+              border: none !important;
+              }
+            </style>
+                <script src="../../../static/js/vendor/jquery.js"></script>
+                <script src="../../../static/js/foundation.min.js"></script>
+                <script>
+                    $(document).foundation();
+                </script>
+                <script type="text/javascript">
+                    function sidebarheight()
+                          {
+                                  var x = $(window).height();
+                                  var y = $('#maincontent').height();
+                                  if(x > y)
+                                  { 
+                                     x = x + 30;
+                                    $('#sidebar').height(x);
+                                  }
+                                  else
+                                  {
+                                    y = y+30;
+                                    $('#sidebar').height(y);
+                                  }
+                                 
+                          }
+                          $(document).ready(function(){
+                    $( window ).resize(function() {
+                                  //alert("resized");
+                                    sidebarheight();
+                                });
+                    $( window ).load(function() {
+                                  //alert("resized");
+                                    sidebarheight();
+                                });
+                    });
+                </script> 
+                <script type="text/javascript">
+                    		$(document).ready(function(){
+                    			$('#search_bar').hide();
+                    			$('#search_click').click(function(){
+                    				$('#search_bar').slideToggle();
+                    			
+                    			});
+                    		});
+
+                    		$('#back_query').click(function(){
+                    				$('#Hide').slideDown();
+                    				$('.table_div').hide();
+                    				$('#back_div').hide();
+                    			});
+                    		$(document).ready(function(){
+                    			$('#feed').hide();
+                    			$('#feedback').click(function(){
+                    				$('#feed').slideToggle();
+                             $('#t1').hide();
+                            $('#t2').hide();
+                            $('#t3').hide();
+                            $('#ss').hide();
+                            $('#s1').hide();
+                    			
+                    			});
+                    		});
+                    		 $(document).ready(function(){
+                            $('#t1').show();
+                            $('#t2').show();
+                            $('#t3').show();
+                            $('#s1').hide();
+                          $('#pp1').click(function(){
+                            $('#t1').show();
+                            $('#t2').show();
+                            $('#t3').show();
+                            $('#ss').hide();
+                            $('#s1').show();
+                          });
+                        });
+                           $(document).ready(function(){
+                           $('#t1').show();
+                            $('#t2').show();
+                            $('#t3').show();
+                            $('#s1').hide();
+                          $('#pp').click(function(){
+                            $('#t1').show();
+                            $('#t2').show();
+                            $('#t3').show();
+                            $('#ss').show();
+                            $('#s1').hide();
+                          });
+
+
+                    	});
+                </script>
+   
+  </body>
+</html>

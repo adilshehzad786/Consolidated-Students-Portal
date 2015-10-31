@@ -1,0 +1,43 @@
+<style>
+ #circle
+{
+position:relative;
+border-radius:50% 50% 50% 50%;
+width:80px;
+height:80px;
+left:65px;
+}
+#circle2
+{
+  position:relative;
+  border-radius: 50% 50% 50% 50%;
+  width:90px;
+  height:90px;
+  left:420px;
+}
+</style>
+ {% extends 'Parents/main.html' %}
+
+
+ {% block body_block %}
+ <div class="large-8 medium-8 columns" style="position: relative; top:50px;">
+     <img src="http://www.vrml.k12.la.us/graphorgan/18strat/strat/professor/gif/j0422581.jpg" id="circle2">
+     <div class="prof1" style="position:relative; top:-60px ;left:70px;">
+         <h5> Alan Donald </h5>
+         <h6> OLd Boys Hostel Incharge</h6>
+         <a> Contact No- 09052230670</a>
+     </div>
+     <img src="http://news.bbcimg.co.uk/media/images/53215000/jpg/_53215637_deirdreheenanjournal.jpg" id="circle">
+     <div class="prof2" style="position:relative; top:-80px;left:275px;">
+         <h5> Dr.Diana Hayden</h5>
+         <h6> Physician</h6>
+         <a> Contact No- 09602237449</a>
+     </div>
+     <img src="http://www.kit.edu/img/pi/2010_093_Professor_Geoffrey_Ozin_wird_KIT_Distinguished_Research_Fellow72dpi.jpg" id="circle2">
+     <div class="prof3" style="position:relative; top:-80px;left:70px;">
+         <h5> George Watson</h5>
+         <h6>Admin Incharge</h6>
+         <a> Contact No- 08890135395 </a>
+     </div>
+ </div>
+ {% endblock%}

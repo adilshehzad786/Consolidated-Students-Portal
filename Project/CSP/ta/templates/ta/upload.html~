@@ -1,0 +1,151 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation | Welcome</title>
+    <link rel="stylesheet" href="../../../static/css/foundation.css" />
+    <script src="../../../static/js/vendor/modernizr.js"></script>
+<style>
+ #circle
+{
+position:relative;
+border-radius:50% 50% 50% 50%;
+width:80px;
+height:80px;
+left:65px;
+}
+</style>
+<script type="text/javascript">
+		$(document).ready(function(){
+			$('#search_bar').hide();
+			$('#search_click').click(function(){
+				$('#search_bar').slideToggle();
+			
+			});
+		});
+	    </script>
+  </head>
+<body>
+<!--    <div class="row">
+      <div class="large-12 columns">
+      	<div class="panel">
+
+<div class="contain-to-grid">-->
+<nav class="top-bar" data-topbar role="navigation">
+<ul class="title-area">
+<li class="name">
+<h1><a href="#">     TA Portal	</a></h1>
+</li>
+<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+<!--<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>-->
+</ul>
+<section class="top-bar-section">
+      <ul class="right">
+      <li class="non-active"><a href="#">Home</a></li>
+      <li class="active"><a href="#">Logout</a></li>
+</section>
+</nav>
+
+<!--<div class="row">
+      <div class="large-12 columns">
+      	<div class="panel">
+<-->
+   <div class="row">
+      <div class="large-4 medium-4 columns">
+<div class="panel callout radius"> <h3>Profile</h3>
+<img src="../../../static/img/adi.jpg" id="circle">
+<br>
+<br>
+<h7> Name: Aditya Bohra</h7><br><br>
+<h7> Parent Name: Mahendra Bohra</h7><br><br>
+<h7> Roll No: 201302016</h7><br><br>
+<h7> Address: E-103 Palash-Niwas(OBH),IIIT-Hyderabad</h7><br><br>
+<h7> Contact No: 9052230670</h7><!--<a href="#" class="button [tiny tiny tiny]">Edit</a>--><br><br>
+ 
+</div>
+</div>
+
+<div class="large-8 columns" style="position: relative; top:70px; ">
+<dl style="margin-top:-40px;margin-left:130px" class="tabs" data-tab>
+  <dd ><a href="view.html">View Marks</a></dd>
+  <dd class="active"><a href="upload.html">Upload Marks</a></dd>
+</dl>
+
+<div id='form' style="position: relative; top:60px; left:75px;">
+<form action="demo_form.asp">
+  <input type="file" name="file" accept="image/*">
+    <input type="submit">
+    </form>
+</div>
+<div class="Manual" style="position:relative; top :100px; left:10px;">
+<h5> Enter Manually</h5>
+</div>
+<div class="page" style="position:relative; top:120px; left:10px;">
+<form>
+  <div class="row">
+    <div class="small-3 columns">
+      <span>Student Name</span>
+    </div>
+    <div class="small-9  columns">
+      <input type="text">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-6 columns">
+      <label> Field Name:
+    <select>
+			          <option selected value="*">Assignment1</option>
+			          <option value="1">Assignment2</option>
+			          <option value="2">Quiz1</option>
+			          <option value="3">Mid1</option>
+			          <option value="4">Quiz2</option>
+                                  <option value="5">Mid22</option>
+                                  <option value="6">Assignment3</option>
+                                  <option value="7">End Sem</option>
+                                  <option value="8">Grades</option>
+			        </select>
+			      </label>
+    </div>
+</div>    
+
+<div class="row">
+    <div class="small-3 columns">
+      <span>Value</span>
+    </div>
+    <div class="small-9 columns">
+      <input type="text" id="left-label">
+    </div>
+</div>
+<div class="submit">
+<a href="#" class="button [tiny]">Go</a>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="footer" style="bottom:-200px;position:absolute;width: 100%;" >
+     <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+      <section class="top-bar-section"> <!-- Right Nav Section --> 
+        <ul class="right">
+        <li><a href="#">Admin login</a></li>
+      <li> | </li>
+      <li><a href="#">Courses</a></li>
+       <li> | </li>
+      <li><a href="#">ISAS</a></li>
+       <li> | </li>
+      <li><a href="#">Student's Mail</a></li>
+       <li> | </li>
+      <li><a href="#">IIIT Homepage</a></li>
+        </ul> <!-- Left Nav Section --> 
+      </section>
+    </nav>
+  </div>
+</body>
+</html>
+

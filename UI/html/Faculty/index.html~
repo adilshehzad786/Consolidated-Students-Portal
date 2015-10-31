@@ -1,0 +1,236 @@
+<html>
+<head>
+<style>
+	#thumbnail img
+	{
+		width:500px;
+		height:500px;
+		margin:5px;
+		float:right;
+		position:absolute;
+		right:50px;
+		top:120px;
+	}
+	canvas
+	{
+		border:1px solid red;
+	}
+</style>
+<title>Faculty | Profile</title>
+		<link rel="stylesheet" type="text/css" href="../../css/foundation.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/reports.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../js/foundation.min.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$('#search_bar').hide();
+			$('#search_click').click(function(){
+				$('#search_bar').slideToggle();
+			
+			});
+		});
+
+		$(document).ready(function(){
+			$("#course_list").click(function(){
+    			$("#Courses").append("<li>input</li>");
+  			});
+
+		});
+	</script>
+</head>
+<body>
+	<nav class="top-bar" data-topbar role="navigation">
+		<ul class="title-area">
+			<li class="name">
+			<h1><a href="#">Name</a></h1>
+			</li>
+			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+			</ul>
+			<section class="top-bar-section">
+			<ul class="right">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href='courses.html'>Courses</a><li>
+			<li><a href='../Reports/index.html'>Reports</a><li>
+			<li id="search_click"><a href="#">Search</a></li>
+			<li><a href="logout.html">Logout</a></li>   
+		</section>
+	</nav>
+	<div class="container" id="search_bar" style="background-color:#444;">
+	<div class="row">
+		<div class="large-10 columns">
+			<input style="margin-top:13px;" type="text" placeholder="Search...">
+		</div>
+			<div class="large-2 columns">
+		<a href="#" style="margin-top:10px;" class="button small">Search</a></div>
+	</div>
+</div>
+	<div class="row" style="margin-top:100px;">
+	<div class= "large-6 columns">
+		<img style="width:65%;" src="http://www.reverse2bid.com/prodimg/noprofile.jpg">
+		<div class="row">
+			<div class="large-12 columns" style="margin-top:20px;margin-left:70px;">
+				<input type="file" style="display:none" id="upload-image" multiple="multiple"></input>
+				<button id="upload" class="drop-area">
+				Upload Picture
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="container large-6 columns" id='hide'>
+		<h3> Profile </h3>
+		<form>
+			<div class="row">
+			<div class="large-12 columns">
+			<label>Name
+			<input type="text" placeholder="Name" />
+			</label>
+			</div>
+			</div>
+			<div class="row">
+			<div class="large-12 columns">
+			<label>Designation
+			<input type="text" placeholder="Designation" />
+			</label>
+			</div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+					<label>Courses Taught</label>
+					<ul id="Courses" class="inline-list">
+						<li>Course 1</li>
+					</ul>
+					<div class="row collapse">
+						<div class="small-8 columns">
+							<input type="text" placeholder="Add Course" />
+						</div>
+						<div class="small-4 columns">
+							<button id="course_list" class="postfix">Add</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+			<div class="large-12 columns">
+			<label>Office Location
+			<input type="text" placeholder="Office Location" />
+			</label>
+			</div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+					<div class="row collapse">
+						<label>E-mail</label>
+						<div class="small-8 columns">
+							<input type="text" placeholder="E-mail" />
+						</div>
+						<div class="small-4 columns">
+							<span class="postfix">@faculty.iiit.ac.in</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="large-6 columns">
+					<a role="button" class="button expand" aria-label="submit form" href="#" class="Submit">Submit</a>
+				</div>
+				<div class="large-6 columns">
+					<a role="button" class="button expand" aria-label="submit form" href="#" class="Submit">Edit</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!--<div>
+	<form action="demo_form.asp">
+	<input type="file" name="pic" accept="image/*">
+	<input type="submit">
+	</form></div>-->
+	</div>
+
+	<div style="width:20px;height:20px; margin:5px" id="thumbnail"></div>
+
+	<script>jQuery(function($){
+			var fileDiv = document.getElementById("upload");
+			var fileInput = document.getElementById("upload-image");
+			console.log(fileInput);
+			fileInput.addEventListener("change",function(e){
+				var files = this.files
+				showThumbnail(files)
+				},false)
+
+			fileDiv.addEventListener("click",function(e){
+				$(fileInput).show().focus().click().hide();
+				e.preventDefault();
+				},false)
+
+			fileDiv.addEventListener("dragenter",function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				},false);
+
+			fileDiv.addEventListener("dragover",function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				},false);
+
+			fileDiv.addEventListener("drop",function(e){
+					e.stopPropagation();
+					e.preventDefault();
+
+					var dt = e.dataTransfer;
+					var files = dt.files;
+
+					showThumbnail(files)
+					},false);
+
+			function showThumbnail(files){
+				for(var i=0;i<files.length;i++){
+					var file = files[i]
+						var imageType = /image.*/
+						if(!file.type.match(imageType)){
+							console.log("Not an Image");
+							continue;
+						}
+
+					var image = document.createElement("img");
+					// image.classList.add("")
+					var thumbnail = document.getElementById("thumbnail");
+					image.file = file;
+					thumbnail.appendChild(image)
+
+						var reader = new FileReader()
+						reader.onload = (function(aImg){
+								return function(e){
+								aImg.src = e.target.result;
+								};
+								}(image))
+					var ret = reader.readAsDataURL(file);
+					var canvas = document.createElement("canvas");
+					ctx = canvas.getContext("2d");
+					image.onload= function(){
+						ctx.drawImage(image,100,100)
+					}
+				}
+			}
+	});</script>
+
+<div class="footer" style="bottom:-800px;position:absolute;width: 100%;" >
+     <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+      <section class="top-bar-section"> <!-- Right Nav Section --> 
+        <ul class="right">
+        <li><a href="#">Admin login</a></li>
+      <li> | </li>
+      <li><a href="#">Courses</a></li>
+       <li> | </li>
+      <li><a href="#">ISAS</a></li>
+       <li> | </li>
+      <li><a href="#">Student's Mail</a></li>
+       <li> | </li>
+      <li><a href="#">IIIT Homepage</a></li>
+        </ul> <!-- Left Nav Section --> 
+      </section>
+    </nav>
+  </div>
+	</body>
+</html>

@@ -1,0 +1,441 @@
+<html>
+<head>
+	<title>Reports</title>
+	<link rel="stylesheet" type="text/css" href="../../css/foundation.min.css">
+	<link rel="stylesheet" type="text/css" href="../../css/reports.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/foundation.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.table_div').hide();
+			$('#back_div').hide();
+			$('#search_bar').hide();
+			$('#run_query').click(function(){
+				$('#Hide').slideUp();
+				$('.table_div').show();
+				$('#back_div').show();
+			});
+			$('#back_query').click(function(){
+				$('#Hide').slideDown();
+				$('.table_div').hide();
+				$('#back_div').hide();
+			});
+			$('#search_click').click(function(){
+				$('#search_bar').slideToggle();
+			
+			});
+		});
+	</script>
+</head>
+<body>
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">Name</a></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+  <section class="top-bar-section">
+    <ul class="right">
+  <li><a href="../Faculty/index.html">Home</a></li>   
+      <li><a href="../Faculty/courses.html">Courses</a></li>
+      <li class="active"><a href="#">Reports</a></li>
+      <li id="search_click"><a href="#">Search</a></li>
+      <li><a href="#">Logout</a></li>   
+  </section>
+</nav>
+<div class="container" id="search_bar" style="background-color:#444;">
+	<div class="row">
+		<div class="large-10 columns">
+			<input style="margin-top:13px;" type="text" placeholder="Search...">
+		</div>
+			<div class="large-2 columns">
+		<a href="#" style="margin-top:10px;" class="button small">Search</a></div>
+	</div>
+</div>
+<div class="container" id="Hide">
+	<div class="large-12 columns filters_div">
+		<!--Others: Grade Drops?-->
+		<h4>Run a Report</h4>
+		<form>
+			<div class="row">
+				<div class="large-6 columns">
+				 <label>From Semester:
+			       <select>
+			       		<option selected value="*">any</option>
+			          <option value="2013M">Monsoon 2013</option>
+			          <option value="2014S">Spring 2014</option>
+			          <option value="2014M">Monsoon 2014</option>
+			          <option value="2015S">Spring 2015</option>
+			        </select>
+			      </label>
+			  	</div>
+			  	<div class="large-6 columns">
+				 <label>To Semester:
+			       <select>
+			       		<option selected value="*">any</option>
+			          <option value="2013M">Monsoon 2013</option>
+			          <option value="2014S">Spring 2014</option>
+			          <option value="2014M">Monsoon 2014</option>
+			          <option value="2015S">Spring 2015</option>
+			        </select>
+			      </label>
+			  	</div>
+			 </div>
+			 <div class="row">
+			 	<div class="large-6 columns">
+			 		<span class="secondary label" style="margin-bottom:5px;">**For a particular semester the from and to semesters should be the same.</span>
+			 	</div>
+			 </div>
+			 <div class="row">
+			  	<div class="large-6 columns">
+				 <label>Current Batch:
+			         <select>
+			       	  <option selected value="*">any</option>
+			          <option value="1">UG1</option>
+			          <option value="2">UG2</option>
+			          <option value="3">UG3</option>
+			          <option value="4">UG4</option>
+			        </select>
+			      </label>
+			  	</div>
+			  	<div class="large-6 columns">
+				 <label>Branch:
+			        <select>
+			       	  <option selected value="*">any</option>
+			          <option value="01">CSE</option>
+			          <option value="02">CSD</option>
+			          <option value="30">ECE</option>
+			          <option value="31">ECD</option>
+			          <option value="30">CND</option>
+			          <option value="31">CHD</option>
+			          <option value="30">CLD</option>
+			          <option value="31">BSD</option>
+			        </select>
+			      </label>
+			  	</div>
+			  	<hr>
+			</div>
+			<div class="row">
+					<div class="large-2 columns">
+				 <label>Operation:
+				 	 <select>
+			          <option value="0">less than</option>
+			          <option value="1">equal to</option>
+			          <option value="2">greater than</option>
+			        </select>
+			      </label>
+			  	</div>
+			  	<div class="large-1 columns">
+				 <label>Grade:
+			       <select>
+			       	  <option selected value="*">any</option>
+			          <option value="10">A</option>
+			          <option value="9">A-</option>
+			          <option value="8">B</option>
+			          <option value="7">B-</option>
+			          <option value="6">C</option>
+			          <option value="5">C-</option>
+			          <option value="4">D</option>
+			          <option value="0">F</option>
+			        </select>
+			      </label>
+			  	</div>
+			  	<div class="large-4 columns">
+				 <label>Course List:
+			         <select>
+			          <option value="-1">all</option>
+			          <option value="0">ICS241 - Operating Systems</option>
+			          <option value="1">ICS104 - Digital Logics and Processors</option>
+			          <option value="2">ICS120 - Computer System Organization</option>
+			        </select>
+			      </label>
+			  	</div>
+			  	<div class="large-1 columns">
+			  		<label>OR</label>
+			  	</div>
+			  	<div class="large-2 columns">
+				 <label>Operation:
+				 	 <select>
+			          <option value="0">less than</option>
+			          <option value="1">equal to</option>
+			          <option value="2">greater than</option>
+			        </select>
+			      </label>
+			  	</div>
+			  	<div class="large-2 columns">
+				 <label>Number of subjects:
+			        <input type="text" placeholder="Enter a number" />
+			      </label>
+			  	</div>
+			  	<hr>
+			</div>
+			<div class="row">
+					<div class="large-2 columns">
+				 <label>Operation:
+				 	 <select>
+			          <option value="0">less than</option>
+			          <option value="1">equal to</option>
+			          <option value="2">greater than</option>
+			        </select>
+			      </label>
+			  	</div>
+			  	<div class="large-2 columns">
+				 <label>Marks:
+			       <input type="text" placeholder="Enter Marks">
+			      </label>
+			  	</div>
+			  	<div class="large-4 columns">
+				 <label>Course List:
+			         <select>
+			          <option value="-1">all</option>
+			          <option value="0">ICS241 - Operating Systems</option>
+			          <option value="1">ICS104 - Digital Logics and Processors</option>
+			          <option value="2">ICS120 - Computer System Organization</option>
+			        </select>
+			      </label>
+			  	</div>
+			  	<div class="large-2 columns">
+				 <label>Exam:
+				 	 <select>
+			          <option value="0">MidSem 1</option>
+			          <option value="1">MidSem 2</option>
+			          <option value="2">EndSem</option>
+			        </select>
+			      </label>
+			  	</div>
+			  	<div class="large-2 columns">
+				 <label>Number of subjects:
+			        <input type="text" placeholder="Enter a number" />
+			      </label>
+			  	</div>
+			  	<hr>
+			</div>
+			<div class="row">
+				<div class="large-3 columns">
+					<label>Choose One:</label>
+					<div class="row">
+						<div class="large-4 columns"><label class="right inline">CGPA</label></div>
+						<div class="switch large-4 columns">
+						  <input id="exampleCheckboxSwitch" type="checkbox">
+						  <label for="exampleCheckboxSwitch"></label>
+						</div> 
+						<div class="large-4 columns"><label class="left inline">SGPA</label></div>
+					</div>
+				</div>
+				<div class="large-3 columns">
+				 <label>Range of CG/SG from:
+			        <input type="text" placeholder="Enter a minimum GPA" />
+			      </label>
+			  	</div>
+			  	<div class="large-3 columns">
+				 <label>to:
+			        <input type="text" placeholder="Enter a maximum GPA" />
+			      </label>
+			  	</div>
+			  	<div class="large-3 columns">
+				 <label>if (SGPA):
+			       <select>
+			          <option value="2013M">Monsoon 2013</option>
+			          <option value="2014S">Spring 2014</option>
+			          <option value="2014M">Monsoon 2014</option>
+			          <option value="2015S">Spring 2015</option>
+			        </select>
+			      </label>
+			  	</div>
+			  <hr>
+			</div>
+			<div class="row">
+				<div class="large-3 columns">
+					<label>Attendance from: </label>
+					<div class="row collapse postfix-round">
+				        <div class="small-9 columns">
+				             <input type="text" placeholder="Minimum attendance" />
+				        </div>
+				        <div class="small-3 columns">
+					          <a href="#" class="button postfix">%</a>
+				        </div>
+			 	    </div>
+			  	</div>
+			  	<div class="large-3 columns">
+				 <label>to:
+			       <div class="row collapse postfix-round">
+				        <div class="small-9 columns">
+				             <input type="text" placeholder="Maximum attendance" />
+				        </div>
+				        <div class="small-3 columns">
+					          <a href="#" class="button postfix">%</a>
+				        </div>
+			 	    </div>
+			      </label>
+			  	</div>
+			  	<div class="large-2 columns">
+				 <label>Month:
+			     	<select>
+			     		<option>all</option>
+			     		<option>Jan</option>
+			     		<option>Feb</option>
+			     		<option>March</option>
+			     		<option>April</option>
+			     		<option>July</option>
+			     		<option>August</option>
+			     		<option>September</option>
+			     		<option>October</option>
+			     		<option>November</option>
+			     	</select>
+			      </label>
+			  	</div>
+			  	<div class="large-4 columns">
+				 <label>Course List:
+			      	 <select>
+			          <option value="-1">all</option>
+			          <option value="0">ICS241 - Operating Systems</option>
+			          <option value="1">ICS104 - Digital Logics and Processors</option>
+			          <option value="2">ICS120 - Computer System Organization</option>
+			        </select>
+			      </label>
+			  	</div>
+			  </div>
+			  <div class="row">
+			  	<div class="large-3 columns">
+			  		<label>Gender</label>
+			  			<input id="checkbox1" type="radio"><label for="checkbox1">All</label>
+      				<input id="checkbox1" type="radio"><label for="checkbox1">Male</label>
+    				<input id="checkbox2" type="radio"><label for="checkbox2">Female</label>
+			  	</div>
+			  	<div class="large-3 columns">
+				<a href="#" class="button" id="run_query">Run Query</a>
+			  	</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="container">
+	<div class="container" style="margin-top:10px;" id="back_div">
+		<div class="large-10 columns">
+			<h4>Query:</h4>
+		</div>
+		<div class="large-2 columns">
+				<a href="#" class="button small" id="back_query">Back</a>
+		</div>
+	</div>
+	<div class="large-12 columns table_div">
+		<div class="row">
+			<div class="large-2 columns">
+				<label>View</label>
+				<select>
+					<option value="10">10</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+				</select>
+			</div>
+			<div class="large-4 columns">
+				<label>Export</label>
+				<select>
+					<option value="0">Excel</option>
+					<option value="1">Word</option>
+					<option value="2">PDF</option>
+				</select>
+			</div>
+			<div class="large-4 columns">
+				<label>Email</label>
+				<select>
+					<option value="0">Group</option>
+					<option value="1">Individual</option>
+					<option value="2">Parents</option>
+				</select>
+			</div>
+			<div class="large-2 columns" style="margin-top:18px;">
+				<a href="#" class="button small" id="apply_query">Apply</a>
+			</div>
+			<hr>
+		</div>
+	<table>
+ 	 <thead>
+    <tr>
+    	 <th>~</th>
+      <th>Roll No</th>
+      <th>Full Name</th>
+      <th>CGPA</th>
+      <th>Attendance</th>
+      <th>Branch</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td><input type="checkbox"></td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+    </tr>
+     <tr>
+     	 <td><input type="checkbox"></td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+    </tr>
+     <tr>
+     	 <td><input type="checkbox"></td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+    </tr>
+     <tr>
+     	 <td><input type="checkbox"></td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+    </tr>
+     <tr>
+     	 <td><input type="checkbox"></td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+    </tr>
+     <tr>
+     	 <td><input type="checkbox"></td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+    </tr>
+     <tr>
+     	 <td><input type="checkbox"></td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+      <td>Filler</td>
+    </tr>
+
+  </tbody>
+</table>
+<div class="pagination-centered">
+  <ul class="pagination">
+    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+    <li class="current"><a href="">1</a></li>
+    <li><a href="">2</a></li>
+    <li><a href="">3</a></li>
+    <li><a href="">4</a></li>
+    <li class="unavailable"><a href="">&hellip;</a></li>
+    <li><a href="">12</a></li>
+    <li><a href="">13</a></li>
+    <li class="arrow"><a href="">&raquo;</a></li>
+  </ul>
+</div>
+	</div>
+</div>
+
+</body>
+</html>

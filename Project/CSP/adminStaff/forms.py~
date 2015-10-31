@@ -1,0 +1,16 @@
+from django import forms
+import os,sys
+import numpy as np 
+from string import whitespace
+
+djangohome='/home/raju/project/ssad43/source/Project/CSP'
+sys.path.append(djangohome)
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+from portal.models import *
+from Students.models import *
+
+class DocumentForm(forms.Form):
+    docfile = forms.FileField(
+        label='Select a file'
+    )
+

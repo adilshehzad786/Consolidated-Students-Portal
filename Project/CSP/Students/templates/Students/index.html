@@ -1,0 +1,384 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Students | Profile</title>
+       {% load staticfiles %}
+           <link rel="stylesheet" type="text/css" href="{% static "css/foundation.min.css" %}">
+           <link rel="stylesheet" type="text/css" href="{% static "css/reports.css" %}">
+           <script type="text/javascript" src="{% static "js/vendor/jquery.js" %}"></script>
+           <script type="text/javascript" src="{% static "js/foundation.min.js" %}"></script>
+           <script type="text/javascript" src="{% static "js/vendor/modernizr.js" %}"></script>
+    </head>
+    <body>
+         <style type="text/css">
+         #sidebar{
+        background-color: #888;
+        padding-top: 35px;
+             border-top: 5px solid #555;
+
+         }
+         #sidebar p, #sidebar{
+        color: white;
+
+         }
+         #table2, #table2 tr, #table2 td{
+        color: white !important;
+        background-color: transparent !important;
+        alpha: 0.8;
+        border: none !important;
+         }
+       </style>
+    <nav class="top-bar" data-topbar role="navigation">
+        <ul class="title-area">
+            <li class="name">
+                <h1>
+                    <a href=/student/>Students</a>
+                </h1>
+            </li>
+            <li class="toggle-topbar menu-icon">
+                <a href="#">
+                    <span>Menu</span>
+                </a>
+            </li>
+        </ul>
+        <section class="top-bar-section">
+            <ul class="right">
+                <li class="active">
+                    <a href=/student/>Home</a>
+                </li>
+                <li id="search_click">
+                    <a href="#">Search</a>
+                </li>
+                <li>
+                    <a href=/portal/logout/>Logout</a>
+                </li> 
+            </ul>
+        </section>
+    </nav>
+    <div class="container" id="search_bar" style="background-color:#444;">
+        <form action="/student/searchResults/" method="post">
+          {% csrf_token %}
+         <div class="row">
+            <div class="large-10 columns">
+                <input style="margin-top:13px;" name="search_input" type="text" placeholder="Search for a Student by Name or Roll Number">
+            </div>
+            <div class="large-2 columns">
+                <input style="margin-top:10px;" class="button small" type="submit" value="Search"/>
+            </div>
+         </div>
+        </form>
+        </div>
+        <div class="container">
+            <div class="large-3 columns" id="sidebar">
+                <button  data-reveal-id="myModalUpload" class="tiny button">Upload Picture</button>
+                   {% if current.username.photo %}
+                     <img src="{{ current.username.photo.url }}" height="420" id="circle">
+                    {% else %}
+                    <img src="http://blogs.kqed.org/education/files/2011/06/facebook_blank_face3.jpeg" id="circle">
+                    {% endif %}
+                <div class="row">
+                    <div class="large-12 columns">
+                      <label>Name
+                       <p>{{current.name}}</p>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="large-12 columns">
+                      <label>Roll Number
+                         <p>{{current.rollno}}</p>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="large-12 columns">
+                      <label>Branch
+                         <p>{{current.programme}}</p>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="large-12 columns">
+                      <label>Email
+                         <p>{{current.username}}</p>
+                      </label>
+                    </div>
+                  </div>
+            </div>
+            <aside class="large-9 columns"  style="margin-top:20px;margin-bottom:10px;color:black;">
+                <div class="row" id="feed">
+                    <div class="large-12 columns">
+                     <form action=/student/feedback/ method="post">
+                        {% csrf_token %}
+                        <label> Feedback </label>
+                        <textarea name="feedback_message" placeholder="Send some feedback"></textarea>
+                        <div class="row" style="float:right;">
+                           <input class="button full small" type="submit" value="Submit">
+                        </div>
+                    </form>
+                    </div>
+                </div>  
+               
+                <div class="large-12 medium-12 columns" style="margin-top:0px;">
+                    <dl class="accordion" data-accordion>
+                        <dd class="accordion-navigation" id="t3">
+                            <a href="#panel1"> Attendance  </a>
+                            <div id="panel1" class="content active">
+                               <table style="width:100%;">
+                                <thead>
+                                    <th><a href="#"> Subject </a></th>
+                                    <th><a href="#"> Day Absent </th>
+                                </thead>
+                                <tbody>
+                                    {% if attendance %}     
+                                        {% for row in attendance %}
+                                            <tr>
+                                                <td>{{ row.coursecode.coursename}} </td>
+                                                <td>{{ row.date }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                         <strong>Daily Attendance not available</strong>
+                                    {% endif %}    
+                                </tbody>
+                            </table>  
+                            </div>
+                        </dd>
+                        <dd class="accordion-navigation" id="t2">
+                            <a href="#panel2"> Grades  </a>
+                            <div id="panel2" class="content">
+                               <table style="width:100%">
+                                    <thead>
+                                        <th><a href="#"> Semester </a></th>
+                                        <th><a href="#"> SGPA </a></td>
+                                        <th><a href="#"> CGPA </a></td>
+                                    </thead>
+                                    <tbody>
+                                        {% if current.getSGPAs %}     
+                                                {% for row in current.getSGPAs %}
+                                                    <tr>
+                                                        <td><a id="{{row.semester}}"> {{row.semester_date}} </a></th>
+                                                        <td>{{ row.sgpa }}</td>
+                                                        <td>{{ row.cgpa }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            {% else %}
+                                                 <strong>No records available.</strong>
+                                            {% endif %}   
+                                    </tbody>
+                                </table>
+                                <table>
+                                    <thead>
+                                        <th><a href="#"> Semester </a></th>
+                                        <th>Course</th>
+                                        <th>Grade</th>
+                                    </thead>
+                                    <tbody>
+                                        {% if current.getAllCourses %}     
+                                                {% for row in current.getAllCourses %}
+                                                    <tr>
+                                                        <td>{{row.semester_date}}</th>
+                                                        <td>{{ row.coursecode.coursename }}</td>
+                                                        <td>{{ row.grade }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            {% else %}
+                                                 <strong>No records available.</strong>
+                                            {% endif %}   
+                                    </tbody>
+                                </table>
+                            </div>
+                        </dd>
+                        <dd class="accordion-navigation" id="t1">
+                            <a href="#panel3"> Contact details </a>
+                            <div id="panel3" class="content">
+                                <div id="edit_details" class="row">
+                                    <div class="large-4 medium-4 columns">
+                                        <div class="row">
+                                        <form action=/student/editStudentProfile/{{current.rollno}}/ method="post">
+                                            {% csrf_token %}
+                                            <div class="large-12 columns">
+                                                <label> Fathers Name
+                                                    <input type="text" value="{{current.fathers_name}}" name="fathersname" placeholder="Father's name" />
+                                                </label>
+                                            </div>
+                                        </div>	
+                                        <div class="row">
+                                            <div class="large-12 columns">
+                                                <label> Mothers Name
+                                                    <input type="text" value="{{current.mothers_name}}" name="mothersname" placeholder="Mother's name" />
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <label>Current CGPA</label>
+                                        <input type="text" value="{{current.current_CGPA}}" disabled name="currentCGPA" placeholder="Current CGPA" />
+                                         <label>Probation</label>
+                                        <input type="text" value="{{current.probation}}" disabled name="currentCGPA" placeholder="Current CGPA" />
+                                        <label>Private<br>
+                                        <input type="checkbox" value="private" {% if current.private %} checked {% endif %} name="private[]" placeholder="Current CGPA" />
+                                        </label>
+                                         <label>Credits Completed</label>
+                                        <input type="text" value="{{current.creditsCompleted}}" disabled name="currentCGPA" placeholder="Current CGPA" />
+                                    </div>
+                                    <div class="large-8 medium-8 columns">
+                                        <label>  Present Address </label>
+                                        <input value="{{current.roomno}}" type="text" name="roomno" placeholder=" Room No " />
+                                        <input value="{{current.hostel}}" type="text" name="hostel" placeholder=" Hostel " />
+                                    </div>
+                                    <div class="large-8 medium-8 columns">
+                                        <label>  Permanent Address </label>
+                                        <input type="text" value="{{current.pa_flatno}}" name="pa_flatno" placeholder=" Flat no " />
+                                        <input type="text" value="{{current.pa_line1}}" name="pa_line1" placeholder=" Address Line 1 " />
+                                        <input type="text" value="{{current.pa_line2}}" name="pa_line2" placeholder=" Address Line 2 " /> 
+                                        <input type="text" value="{{current.pa_city}}" name="pa_city" placeholder=" City " />
+                                        <input type="text" value="{{current.pa_state}}" name="pa_state" placeholder=" State " />
+                                        <input type="text" value="{{current.pa_country}}" name="pa_country" placeholder=" Country " />
+                                        <input type="text" value="{{current.pa_pincode}}" name="pa_pincode" placeholder=" Pincode " />
+                                    </div>
+                                    <input class="button full" type="submit" value="Submit">
+                                    </form>
+                                </div>
+                                <div id="view_details" class="row">
+                                   <div class="large-4 medium-4 columns">
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <label> Fathers Name
+                                                <p>{{ current.fathers_name }}</p>
+                                            </label>
+                                        </div>
+                                    </div>  
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <label> Mothers Name
+                                                <p>{{ current.mothers_name }}</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                        <label>CGPA
+                                            <p> {{ current.current_CGPA }}</p>
+                                        </label>
+                                         <label>Probation Status
+                                            <p> {{ current.probation }}</p>
+                                        </label>
+                                         <label>Credits Completed
+                                            <p> {{ current.creditsCompleted }}</p>
+                                        </label>
+                                   </div>
+                                   <div class="large-8 medium-8 columns">
+                                    <label>  Present Address
+                                        <p>{{ current.roomno }}, {{ current.hostel }}</p>
+                                    </label>
+                                   </div>
+                                   <div class="large-8 medium-8 columns">
+                                    <label>  Permanent Address
+                                        <h6>{{ current.pa_flatno }}</h6> 
+                                        <h6>{{ current.pa_line1 }}</h6>
+                                        <h6>{{ current.pa_line2 }}</h6>
+                                        <h6>{{ current.pa_city }}, {{ current.pa_state }}</h6>
+                                        <h6>{{ current.pa_country }}, {{ current.pa_pincode }}</h6>
+                                    </label>
+                                   </div>        
+                                    <button id="edit" class="button full">Edit</button>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </aside>
+        </div>
+        <div id="myModalUpload" class="reveal-modal tiny" data-reveal="">
+          <form action=/student/uploadPicture/{{current.id}}/ method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="row">
+                <label> Upload a picture
+                    <input type="file" name="picture" class="button tiny">
+                </label>
+            </div>
+            <div class="row">
+                <label>
+                    <input type="submit" value="Upload!" class="button tiny">
+                </label>
+            </div>
+            <a class="close-reveal-modal">&#215;</a>
+          </form>
+        </div>
+            <div class="footer" style="bottom:0px;position:fixed;width: 100%;margin-top:10px;" >
+                <nav class="top-bar" data-topbar role="navigation">
+                    <ul class="title-area">
+                        <section class="top-bar-section"> <!-- Right Nav Section --> 
+                            <ul class="right">
+                                <li id="feedback"><a href="#">Feedback</a></li>
+                                <li> | </li>
+                                <li><a href="courses.iiit.ac.in">Courses</a></li>
+                                <li> | </li>
+                                <li><a href="isas.iiit.ac.in">ISAS</a></li>
+                                <li> | </li>
+                                <li><a href="students.iiit.ac.in">Student's Mail</a></li>
+                                <li> | </li>
+                                <li><a href="iiit.ac.in">IIIT Homepage</a></li>
+                                <li> | </li>
+                                <li><a href=/ta/>TA</a></li>
+                            </ul> <!-- Left Nav Section --> 
+                        </section>
+                    </nav>
+                </div>
+                <script src="../../../static/js/vendor/jquery.js"></script>
+                <script src="../../../static/js/foundation.min.js"></script>
+                <script>
+                $(document).foundation();
+                </script>
+                <script type="text/javascript">
+                function sidebarheight()
+                      {
+                              var x = $(window).height();
+                              var y = $('#maincontent').height();
+                              if(x > y)
+                              { 
+                                 x = x + 30;
+                                $('#sidebar').height(x);
+                              }
+                              else
+                              {
+                                y = y+30;
+                                $('#sidebar').height(y);
+                              }
+                             
+                      }
+                      $(document).ready(function(){
+                $( window ).resize(function() {
+                              //alert("resized");
+                                sidebarheight();
+                            });
+                $( window ).load(function() {
+                              //alert("resized");
+                                sidebarheight();
+                            });
+                });
+                </script> 
+            <script type="text/javascript">
+            		$(document).ready(function(){
+            			$('#search_bar').hide();
+            			$('#search_click').click(function(){
+            				$('#search_bar').slideToggle();
+            			
+            			});
+            		});
+            		$(document).ready(function(){
+            			$('#feed').hide();
+            			$('#feedback').click(function(){
+            				$('#feed').slideToggle();
+            			});
+                        $('#edit_details').hide();
+                        $('#edit').click(function(){
+                            $('#edit_details').toggle();
+                            $('#view_details').toggle();
+                        });
+            		});
+
+            		
+            </script>
+  </body>
+</html>
+

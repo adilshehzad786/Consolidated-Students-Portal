@@ -1,0 +1,132 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parent's Portal | Welcome</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/foundation.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/reports.css" %}">
+    <script type="text/javascript" src="{% static "js/vendor/jquery.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/foundation.min.js" %}"></script>
+     <script type="text/javascript" src="{% static "js/foundation/foundation.topbar.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/vendor/modernizr.js" %}"></script>
+    <style>
+     #circle
+    {
+    position:relative;
+    border-radius:50% 50% 50% 50%;
+    width:80px;
+    height:80px;
+    left:65px;
+    }
+    </style>
+  </head>
+  <body>
+  <nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name">
+        <h1>
+          <a href="#">Parent's Portal</a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+      <ul class="right">
+        <li class="active">
+          <a href=/parents/notifications/>Home</a>
+        </li>
+        <li>
+          <a href=/parents/attendance>Attendance</a>
+        </li>
+        <li class="non-active">
+          <a href=/parents/grades>Grades</a>
+        </li>
+        <li class="non-active">
+          <a href=/parents/links>Links</a>
+        </li>
+        <li class="non-active">
+          <a href=/parents/statistics>Statistics</a>
+        </li>
+        <li class="non-active">
+          <a href=/parents/contacts>Contacts</a>
+        </li>
+        <li class="has-dropdown not-click">
+          <a>Account</a>
+          <ul class="dropdown">
+            <li class="non-active">
+          <a href="/accounts/password_change">Change Password</a>
+        </li>
+        <li class="non-active">
+          <a href=/parents/editprofile/>Edit Profile</a>
+        </li>
+        <li class="non-active">
+          <a href=/portal/logout>Logout</a>
+        </li>
+          </ul>
+        </li>
+      </ul>  
+    </section>
+  </nav>
+  <div class="row">
+      <div class="large-12 columns">
+        <div class="panel">
+          <div class="row">
+            <div class="large-4 medium-4 columns">
+              <div class="panel callout radius">
+                <h3>Profile</h3>
+                {% if current.getStudent.username.photo %}
+                 <img src="{{ current.getStudent.username.photo.url }}" height="420" id="circle">
+                {% else %}
+                <img src="http://blogs.kqed.org/education/files/2011/06/facebook_blank_face3.jpeg" id="circle">
+                {% endif %}
+                <div class="row">
+                  <div class="large-12 columns">
+                      <label> Name
+                        <p>{{ current.name }}</p>
+                      </label>
+                  </div>
+                </div>  
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label> P/O:
+                      <p>{{ current.getStudent.name }}</p>
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-12 columns">
+                  <label>  Permanent Address
+                    <h6>{{ current.plot_flatno }}</h6> 
+                    <h6>{{ current.addr_line1 }}</h6>
+                    <h6>{{ current.addr_line2 }}</h6>
+                    <h6>{{ current.city }}, {{ current.state }}</h6>
+                    <h6>{{ current.country }}, {{ current.pincode }}</h6>
+                    <h6> Contact No: {{current.contact_no}}</h6>
+                  </label>
+                </div>
+                </div>        
+              </div> 
+            </div>
+            {% block body_block %}{% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="footer" style="bottom:0px;position:fixed;width: 100%;" >
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <section class="top-bar-section"> <!-- Right Nav Section --> 
+          <ul class="right">
+            <li><a href=/admin/>Admin login</a></li>
+            <li> | </li>
+            <li><a href="ipis.iiit.ac.in">Parent's Portal</a></li>
+            <li> | </li>
+            <li><a href="iiit.ac.in">IIIT Homepage</a></li>
+          </ul> <!-- Left Nav Section --> 
+        </section>
+      </uL>
+    </nav>
+  </div>
+</body>

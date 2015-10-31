@@ -1,0 +1,155 @@
+ {% extends 'ta/main.html' %}
+
+
+{% block body_block %}
+<script type="text/javascript">
+      $(document).ready(function(){
+          $('.edit').hide();
+            $('td:nth-child(2),th:nth-child(2)').show();
+            $('td:nth-child(3),th:nth-child(3)').show();
+            $('td:nth-child(4),th:nth-child(4)').hide();
+            $('td:nth-child(5),th:nth-child(5)').hide();
+            $('td:nth-child(6),th:nth-child(6)').hide();
+            $('td:nth-child(7),th:nth-child(7)').hide();
+        $('#category').on('change', function() {
+          k = $(this).val()
+          if(k == 'MidSem1')
+          {
+            $('td:nth-child(2),th:nth-child(2)').show();
+            $('td:nth-child(3),th:nth-child(3)').show();
+            $('td:nth-child(4),th:nth-child(4)').hide();
+            $('td:nth-child(5),th:nth-child(5)').hide();
+            $('td:nth-child(6),th:nth-child(6)').hide();
+            $('td:nth-child(7),th:nth-child(7)').hide();
+          }
+          else if (k == 'MidSem2')
+          {
+            $('td:nth-child(2),th:nth-child(2)').hide();
+            $('td:nth-child(3),th:nth-child(3)').hide();
+            $('td:nth-child(4),th:nth-child(4)').show();
+            $('td:nth-child(5),th:nth-child(5)').show();
+            $('td:nth-child(6),th:nth-child(6)').hide();
+            $('td:nth-child(7),th:nth-child(7)').hide();
+          }
+          else if (k == 'EndSem')
+          {
+            $('td:nth-child(2),th:nth-child(2)').hide();
+            $('td:nth-child(3),th:nth-child(3)').hide();
+            $('td:nth-child(4),th:nth-child(4)').hide();
+            $('td:nth-child(5),th:nth-child(5)').hide();
+            $('td:nth-child(6),th:nth-child(6)').show();
+            $('td:nth-child(7),th:nth-child(7)').show();
+          }
+        });
+        $('#edit').click(function(){
+          $('.view').toggle();
+          $('.edit').toggle();
+
+        });
+            });
+</script>
+ <div class="row" style="margin-bottom:80px !important;">
+  <div class="header container columns large-3" style="margin-top:25%;">
+     <form id="login_form" method="post" action=/ta/updateMarks/{{course.pk}}/>
+     {% csrf_token %}
+     <select name="category" id="category">
+          <option value="MidSem1">Mid Sem 1</option>
+          <option value="MidSem2">Mid Sem 2</option>
+          <option value="EndSem">EndSem</option>
+        </select>
+        <a data-reveal-id="myModalUpload" class="button full small">Upload</a>
+        <a id="edit" class="button full small">Edit</a>
+        <input class="button full small" type="submit" value="Save changes">
+    
+  </div>
+	<div class="header container columns large-9"> 
+		<div class="large-12 columns">
+  <table id="MarksAll">
+ 	 <thead>
+    <tr>
+      <th>Roll No</th>
+      <th>Received Marks</th>
+      <th>Total Marks</th>
+      <th>Received Marks</th>
+      <th>Total Marks</th>
+      <th>Received Marks</th>
+      <th>Total Marks</th>
+    </tr>
+  </thead>
+  <tbody>
+     {% if ListofMarks %}     
+      {% for studentID,studentName,studentMD1,studentMD1T,studentMD2,studentMD2T,studentESM,studentESMT in ListofMarks %}
+        <tr>
+          <td>{{studentName}} <span style="display:none;"><input value="{{studentID}}" name="rollnos[]"></span></td>
+          <td>
+            <span class="view">{%if studentMD1 %}{{studentMD1}}{% else %} - {% endif %}</span>
+            <span class="edit"><input value="{%if studentMD1 %}{{studentMD1}}{% else %}{% endif %}" name="MD1[]"></span>
+          </td>
+          <td>
+            <span class="view">{%if studentMD1T %} {{studentMD1T}}{% else %} - {% endif %}</span>
+            <span class="edit"><input value="{%if studentMD1T %}{{studentMD1T}}{% else %}{% endif %}" name="MD1T[]"></span>
+          </td>
+          <td>
+            <span class="view">{%if studentMD2 %}{{studentMD2}}{% else %} - {% endif %}</span>
+            <span class="edit"><input value="{%if studentMD2 %}{{studentMD2}}{% else %}{% endif %}" name="MD2[]"></span>
+          </td>
+          <td>
+            <span class="view">{%if studentMD2T %}{{studentMD2T}}{% else %} - {% endif %}</span>
+            <span class="edit"><input value="{%if studentMD2T %}{{studentMD2T}}{% else %}{% endif %}" name="MD2T[]"></span>
+          </td>
+          <td>
+            <span class="view">{%if studentESM %}{{studentESM}}{% else %} - {% endif %}</span>
+            <span class="edit"><input value="{%if studentESM %}{{studentESM}}{% else %}{% endif %}" name="ESM[]"></span>
+          </td>
+          <td>
+            <span class="view">{%if studentESMT %}{{studentESMT}}{% else %} - {% endif %}</span>
+            <span class="edit"><input value="{%if studentESMT %}{{studentESMT}}{% else %}{% endif %}" name="ESMT[]"></span>
+          </td>
+        </tr>
+      {% endfor %}
+           
+    {% else %}
+        <strong>No students taking this course currently.</strong>
+    {% endif %}
+  </tbody>
+</table>
+  </form>
+		</div>
+	</div>
+</div>
+  </div>
+</div>
+<div id="myModalUpload" class="reveal-modal xlarge" data-reveal="">
+  <form action=/ta/processUploadMarks/{{course.id}}/ method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <div class="row">
+        <div class="large-12 columns">
+          <label style="margin-top:8px;">Exam Name
+           <select name="examName" id="category">
+                <option value="MD1">Mid Sem 1</option>
+                <option value="MD2">Mid Sem 2</option>
+                <option value="ESM">EndSem</option>
+              </select>
+          </label>
+        </div>
+         <div class="large-12 columns">
+          <label style="margin-top:8px;">Total Marks
+          <input name="totalMarks" type="text">
+          </label>
+        </div>
+        <div class="large-6 columns">
+          <h6>The file must be .csv & The column format must be ID, ROLLNO, MARKS</h6>
+          <label style="margin-top:8px;">Upload a file:
+             <p>
+                 {{ form.docfile }}
+             </p>
+           </label>
+        </div>
+         <div class="large-6 columns">
+          <input class="button" type="submit" style="width:100%;" value="Upload">
+        </div>
+      </div>
+    <a class="close-reveal-modal">&#215;</a>
+  </form>
+</div>
+{% endblock %}

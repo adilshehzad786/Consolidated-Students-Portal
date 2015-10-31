@@ -1,0 +1,288 @@
+<html>
+<head>
+	<title>Reports</title>
+	{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/foundation.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/reports.css" %}">
+    <script type="text/javascript" src="{% static "js/vendor/jquery.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/foundation.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/foundation/foundation.reveal.js" %}"></script>
+	<script>
+  	 	$(document).foundation();
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		$('#search_bar').hide();	
+			$('#search_click').click(function(){
+				$('#search_bar').slideToggle();
+			});
+			var i = 'unchecked';
+			$('#selectAll').click(function(){
+			if(i == 'unchecked')
+			{
+			    $('.checkbox').prop('checked',true);
+			    i = 'checked';
+			}
+			else
+			{
+				$('.checkbox').prop('checked',false);
+				i = 'unchecked';
+			}
+			});
+		});
+	</script>
+</head>
+<body>
+{% block nav_block %}{% endblock %}
+<div class="container table_div">
+		<div class="container" style="margin-top:10px;" id="back_div">
+			<div class="large-12 columns">
+				<div class="container">
+					<div class="large-2 columns">
+						<a class="button full small" id="selectAll">Select All</a>
+					</div>
+				<form action="/{{app}}/exportOrEmail/" method="POST" >
+					 {% csrf_token %}
+					<div class="large-2 columns">
+						<input name="querylist" value="{{list}}" style="display:none;">
+						<!-- <label>Email</label>
+						<select>
+							<option value="0">Group</option>
+							<option value="1">Individual</option>
+							<option value="2">Parents</option>
+						</select> -->
+						<a href="#" class="button full small" data-reveal-id="myModalEmail" id="email_query">Notify</a>
+					</div>
+					<div class="large-2 columns">
+						<a href="#" class="button full small" data-reveal-id="myModal" id="back_query">Change Columns</a>
+					</div>
+					<div class="large-1 columns">
+						<p></p>
+					</div>
+					<div class="large-2 columns">
+						<a href="#" class="button full small" data-reveal-id="myExportModal" id="back_query">Export</a>
+					</div>
+					<div class="large-2 columns dropdownbu">
+						<label>View</label>
+						<select>
+							<option value="10">10</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>
+					</div>
+					<!-- <div class="large-2 columns dropdownbu">
+						<label>Export</label>
+						<select>
+							<option value="0">CSV</option>
+							<option value="0">Excel</option>
+							<option value="1">Word</option>
+							<option value="2">PDF</option>
+						</select>
+					</div> -->
+					<div class="large-1 columns" >
+						<a href="#" data-reveal-id="myExportModal" class="button full small" id="apply_query">Apply</a>
+					</div>
+
+					<hr>
+				</div>
+			</div>
+			<div class="large-11 columns">
+				<h4>Query:</h4>
+				<ul id="ListofQueries" class="inline-list">
+					{% if ListofQueries %}     
+					      {% for query in ListofQueries %}
+					      	<li>{{query}}</li>
+					      {% endfor %}
+					    {% else %}
+					        <strong>No subqueries.</strong>
+					    {% endif %}
+				</ul>
+			</div>
+		</div>
+		<div class="large-12 columns">
+			<table class="results">
+				 	<thead>
+					    <tr>
+						    <th>~</th>
+						    <th>Roll No</th>
+						    <th>Full Name</th>
+						    <th>CGPA</th>
+						    <th>Programme</th>
+						    <th>Gender</th>
+						    <th>Batch</th>
+						    <th>Probation Status</th>
+						    <th>Tutorial Section</th>
+						    <th>Credits Completed</th>
+						   	<th>View Profile</th>
+					    </tr>
+					</thead>
+				<tbody>
+					{% if StudentsList %}     
+					      {% for student in StudentsList %}
+					      	{% if student %}
+					        <tr>
+					          <td><input class="checkbox" id="{{student.rollno.rollno}}" name="students[]" type="checkbox" value="{{student.rollno}}"></td>
+							    <td>{{ student.rollno.rollno}}</td>
+							    <td>{{ student.rollno.name}}</td>
+							    <td>{% if student.rollno.current_CGPA%}{{ student.rollno.current_CGPA}}{% else %}{{ student.rollno.getCGPA}}{% endif %}</td>
+							    <td>{{ student.rollno.programme}}</td>
+							    <td>{{ student.rollno.gender}}</td>
+							    <td>{{ student.rollno.batch}}</td>
+							    <td>{{ student.rollno.probation}}</td>
+							    <td>{{ student.rollno.tutorial_section}}</td>
+							    <td>{{ student.rollno.creditsCompleted}}</td>
+							    <td><a href=/{{app}}/viewStudent/{{student.rollno.rollno}}>View</a></td>
+					        </tr>
+					         {% endif %}
+					      {% endfor %}
+					    {% else %}
+					        <strong>No records found.</strong>
+					    {% endif %}
+			  	</tbody>
+			</table>
+			<div class="pagination-centered">
+				<ul class="pagination">
+				    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+				    <li class="current"><a href="">1</a></li>
+				    <li><a href="">2</a></li>
+				    <li><a href="">3</a></li>
+				    <li><a href="">4</a></li>
+				    <li class="unavailable"><a href="">&hellip;</a></li>
+				    <li><a href="">12</a></li>
+				    <li><a href="">13</a></li>
+				    <li class="arrow"><a href="">&raquo;</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="myModalEmail" class="reveal-modal small" data-reveal="">
+
+	 	<h3>Notify:</h3>
+	 	<select name="email">
+	 		<option value="-1">None</option>
+	 		<option value="parents">Parents as a group</option>
+	 		<option value="indi">Email marked students as individuals</option>
+	 		<option value="group">Email marked students as a group</option>
+	 		<option value="other">Email other user</option>
+	 		<option value="me">Email myself</option>
+	 	</select>
+	 	<input name="otheruserin" type="text" placeholder="Enter user email address">
+	 	<input name="subject" type="text" placeholder="Subject">
+	 	<textarea name="message" type="text" placeholder="Enter Message"></textarea>
+	 <input class="button full small" type="submit" value="Send!">
+	  <a class="close-reveal-modal">&#215;</a>
+	</div>
+	<div id="myExportModal" class="reveal-modal small" data-reveal="">
+	 	<h3>Export and Email:</h3>
+	 	<label>Export to:</label>
+	 	<select name="exporttype">
+	 		<option value="0">None</option>
+	 		<option value="1">CSV</option>
+	 	<!-- 	<option value="0">Excel</option>
+	 		<option value="1">Word</option>
+	 		<option value="2">PDF</option> -->
+	 	</select>
+	 	<label>Email to:</label>
+	 	<select name="exportemail">
+	 		<option value="">None</option>
+	 		<option value="other">Email other user</option>
+	 		<option value="me">Email myself</option>
+	 	</select>
+	 	<input name="otheruser" type="text" placeholder="Enter user email address">
+	 <input class="button full small" type="submit" value="Send!">
+	  <a class="close-reveal-modal">&#215;</a>
+	</div>
+	<div id="myModal" class="reveal-modal small" data-reveal="">
+	 <table>
+	 	<h3>Change visible coulumns.</h3>
+	 	<thead>
+	 		<th>~</th>
+			<th>Table Name</th>
+			<tbody>
+				<tr>
+					<td><input id="2" type="checkbox" class="rows" checked></td>
+				    <td>Roll No</td>
+			    </tr>
+			    <tr>
+				    <td><input id="3" type="checkbox" value="3"  class="rows" checked></td>
+				    <td>Full Number</td>
+			    </tr>
+			    <tr>
+				    <td><input id="4" type="checkbox"  class="rows" checked></td>
+				    <td>CGPA</td>
+			    </tr>
+			    <tr>
+					<td><input id="5" type="checkbox"  class="rows" checked></td>
+				    <td>Programme</td>
+			    </tr>
+			    <tr>
+				    <td><input id="6" type="checkbox"  class="rows" checked></td>
+				    <td>Gender</td>
+			    </tr>
+			    <tr>
+				    <td><input id="7" type="checkbox"  class="rows" checked></td>
+				    <td>Batch</td>
+			    </tr>
+			     <tr>
+				    <td><input id="8" type="checkbox"  class="rows" checked></td>
+				    <td>Probation</td>
+			    </tr>
+			    <tr>
+				    <td><input id="9" type="checkbox"  class="rows" checked></td>
+				    <td>Tutorial Section</td>
+			    </tr>
+			    <tr>
+				    <td><input id="10" type="checkbox"  class="rows" checked></td>
+				    <td>Credits Completed</td>
+			    </tr>
+			</tbody>
+	 	</thead>
+	 </table>
+	 <script type="text/javascript">
+	 $(document).ready(function(){
+				$('.rows').change(function(){
+					var id  = $(this).attr('id')
+					// alert("This checkbox has an id of "+ id)
+				if ( this.checked ) 
+				{
+				   $('.results td:nth-child('+id+'), .results th:nth-child('+id+')').show();
+				}
+			  else
+				{
+					$('.results td:nth-child('+id+'), .results th:nth-child('+id+')').hide();
+				}
+				});
+			});
+	 </script>
+	 <!-- <a href="#" class="button full small" id="apply_query">Apply</a> -->
+	  <a class="close-reveal-modal">&#215;</a>
+	</div>
+	</form>
+	<div class="footer" style="bottom:0px;position:fixed;width: 100%;margin-top:10px;" >
+     <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+      <section class="top-bar-section"> <!-- Right Nav Section --> 
+         <ul class="right">
+	      <li><a href=/student/>Student</a></li>
+	      <li> | </li>
+	      <li><a href=/parents/>Parent</a></li>
+	      <li> | </li>
+	      <li><a href=/adminStaff/>Admin Staff</a></li>
+	      <li> | </li>
+	      <li><a href=/admin/>Admin</a></li>
+	      <li> | </li>
+	      <li><a href=/faculty/>Faculty</a></li>
+          <li> | </li>
+          <li><a href=/facultystaff/>Faculty Staff</a></li>
+          <li> | </li>
+	      <li><a href=/ta/>TA</a></li>
+        </ul> 
+      </section>
+    </nav>
+
+	</div>
+	<script>
+  $(document).foundation();
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% extends 'Reports/_results.html' %}
+
+
+{% block nav_block %}
+
+<nav class="top-bar" data-topbar role="navigation">
+	  <ul class="title-area">
+	    <li class="name">
+	      <h1><a href=/facultystaff/>{{current.name}}</a></h1>
+	    </li>
+	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	  </ul>
+	  <section class="top-bar-section">
+	    <ul class="right">
+	  	  <li class="active"><a href=/facultystaff/>Home</a></li>   
+	      <li><a href=/facultystaff/reports/>Reports</a></li>
+	      <li id="search_click"><a>Search</a></li>
+	      <li><a href=/portal/logout>Logout</a></li>   
+	  </section>
+	</nav>
+<div class="container" id="search_bar" style="background-color:#444;">
+	<form action="/facultystaff/searchResults/" method="post">
+		 {% csrf_token %}
+		<div class="row">
+			<div class="large-10 columns">
+				<input style="margin-top:13px;" name="search_input" type="text" placeholder="Search for a Student by Name or Roll Number">
+			</div>
+				<div class="large-2 columns">
+			<input style="margin-top:10px;" class="button small" type="submit" value="Search"/></div>
+		</div>
+	</form>
+</div>
+{% endblock %}

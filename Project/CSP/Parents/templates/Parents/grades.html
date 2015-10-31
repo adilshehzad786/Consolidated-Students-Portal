@@ -1,0 +1,46 @@
+
+<style>
+ #circle
+{
+position:relative;
+border-radius:50% 50% 50% 50%;
+width:80px;
+height:80px;
+left:65px;
+}
+</style>
+{% extends 'Parents/main.html' %}
+
+
+{% block body_block %}
+ 
+<div class="large-8 medium-8 columns" style="position: relative; top:70px; ">
+    <div class="table">
+      <h6> Credits Completed: {{current.getStudent.creditsCompleted}}
+      </h6>
+        <table>
+            <thead>
+                <tr>
+                    <th width="150">Course</th>
+                    <th width="150">Grade</th>
+                </tr>
+            </thead>
+            <tbody> 
+                 {% if current.getStudent.getAllCourses %}     
+                      {% for row in current.getStudent.getAllCourses %}
+                        <tr>
+                            <td>{{ row.coursecode.coursename}} </td>
+                            <td>{{ row.grade }}</td>
+                        </tr>
+                      {% endfor %}
+                    {% else %}
+                         <strong>No records available</strong>
+                  {% endif %}    
+            </tbody>
+        </table>
+    </div>
+    <br>
+</div>
+{% endblock%}
+
+

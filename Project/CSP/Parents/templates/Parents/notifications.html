@@ -1,0 +1,45 @@
+{% extends 'Parents/main.html' %}
+
+
+{% block body_block %}
+<div class="large-8 medium-8 columns" style="position: relative; top:30px;">
+	<!-- <a>* This is basically the home page for the parent's portal. It consists of basic information of the parent and also the notifications,i.e. messages from faculty or administration regarding student.</a><br><br> -->
+	<div class="row">
+		<div class="large-12">
+	 <form action=/parents/feedback/ method="post">
+	    {% csrf_token %}
+	    <label> Feedback
+	    <textarea name="feedback_message" placeholder="Send some feedback"></textarea>
+	     </label>
+	    <div class="row" style="margin-left:10px;">
+	       <input class="tiny button" type="submit" value="Submit">
+	    </div>
+	</form>
+	</div>
+	<h5> Notifications:</h5>
+	<table>
+		<thead>
+			<tr>
+				<th width="100">From</th>
+				<th width="100">Date</th>
+				<th width="350">Notification</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if notifications %}     
+			     {% for not in notifications %}
+			       <tr>
+			       		<td>{{ not.fromid }} </td>
+			        	<td>{{ not.date }} </td>
+			        	<td>{{ not.message }}</td>
+			       </tr>
+			     {% endfor %}
+			   {% else %}
+			        <strong>No records available</strong>
+			 {% endif %}    
+		</tbody>
+	</table>
+	</div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,178 @@
+{% extends 'adminStaff/main.html' %}
+
+
+{% block body_block %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static "js/foundation/foundation.accordion.js" %}"></script>
+	<script>
+  	 	$(document).foundation();
+	</script>
+<script type="text/javascript">
+function sidebarheight()
+      {
+              var x = $(window).height();
+              var y = $('#maincontent').height();
+              if(x > y)
+              { 
+                 x = x + 30;
+                $('#sidebar').height(x);
+              }
+              else
+              {
+                y = y+30;
+                $('#sidebar').height(y);
+              }
+             
+      }
+      $(document).ready(function(){
+$( window ).resize(function() {
+              //alert("resized");
+                sidebarheight();
+            });
+$( window ).load(function() {
+              //alert("resized");
+                sidebarheight();
+            });
+});
+</script>
+
+<style type="text/css">
+  #sidebar{
+    background-color: #333;
+    padding-top: 35px;
+         border-top: 5px solid #555;
+
+  }
+  #sidebar h3, #sidebar h4,#sidebar p, #sidebar label {
+    color: white;
+    alpha:0.6;
+
+  }
+  #table2, #table2 tr, #table2 td{
+  	color: white !important;
+  	background-color: transparent !important;
+  	alpha: 0.8;
+  	border: none !important;
+  }
+</style>
+
+<div class="container">
+	<div class="large-3 columns" id="sidebar">
+		 <button  data-reveal-id="myModalUpload" class="tiny button">Upload Picture</button>
+		{% if current.username.photo %}
+		 <img src="{{ current.username.photo.url }}" height="420">
+		{% else %}
+		<img src="http://blogs.kqed.org/education/files/2011/06/facebook_blank_face3.jpeg">
+		{% endif %}
+			{% if current %}
+			<div class="row" style="margin-top:12px;">
+			    <div class="large-12 columns">
+			      <label>Name
+			       <p>{{ current.name }}</p>
+			      </label>
+			    </div>
+			  </div>
+			  <div class="row">
+			    <div class="large-12 columns">
+			      <label>Designation: 
+			       <p>{{ current.designation }}</p>
+			      </label>
+			    </div>
+			  </div>
+			  <div class="row">
+			    <div class="large-12 columns">
+			      <label>Contact Email:
+			       <p>{{ current.username }}</p>
+			      </label>
+			    </div>
+			  </div>
+			 {% endif %}
+	</div>
+	<div class="large-9 columns" id="maincontent">
+		<div class ="row" style="margin-top:50px;">
+			<div class="large-12 columns blocks" >
+				<dl class="accordion" data-accordion>
+					<dd class="accordion-navigation"> 
+						<a href="#panel1">Send Notifications</a> 
+						<div id="panel1" class="content">
+							<h4 class="subheading">{{sent}}</h4>
+						 	<h3>Send Notifications:</h3>
+						 	<form action="/adminStaff/" method="post">
+		 						{% csrf_token %}			  
+			  			<!-- <div class="row">
+			    			<div class="large-12 columns">
+			      				<label>To:
+			        				<textarea name="to" placeholder="small-12.columns" rows="5"></textarea>
+			      				</label>
+			    			</div>
+			  			</div>   -->
+			  			<div class="row">
+			    			<div class="large-12 columns">
+			      				<label>Message
+			        				<textarea name="message" placeholder="Send a notification to all Parents" rows="10"></textarea>
+			      				</label>
+			    			</div>
+			  			</div>
+						 <div class="row">
+						    <div class="large-12 columns">
+						      <label>
+						      <input type="submit" class="button" value="Send"/>
+						      </label>
+						    </div>
+						  </div>
+						</div> 
+					</form>
+					</dd> 
+					<dd class="accordion-navigation"> 
+						<a href="#panel2">View Feedback</a> 
+						<div id="panel2" class="content active"> 
+							<h3>View Feedback:</h3>
+						<table>
+							 <thead>
+							    <tr>
+							      <th>Date</th>
+							      <th>From</th>
+							      <th>Message</th>
+							    </tr>
+							  </thead>
+							<tbody>
+								{% if feedbackList %}
+								{% for row in feedbackList %}
+								<tr>									
+									<td>{{row.date}}</td>
+									<td>{{row.fromusername}}</td>
+									<td>{{row.message}}</td>
+								</tr>
+								{% endfor %}
+								{% else %}
+									<strong>No feedback available at the moment.</strong>
+								{% endif %}
+							</tbody>
+						</table>
+						</div>
+					</dd> 
+				</dl>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="myModalUpload" class="reveal-modal tiny" data-reveal="">
+          <form action=/adminStaff/uploadPicture/ method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="row">
+                <label> Upload a picture
+                    <input type="file" name="picture" class="button tiny">
+                </label>
+            </div>
+            <div class="row">
+                <label>
+                    <input type="submit" value="Upload!" class="button tiny">
+                </label>
+            </div>
+            <a class="close-reveal-modal">&#215;</a>
+          </form>
+        </div>
+<script>
+  $(document).foundation();
+</script>
+{% endblock %}

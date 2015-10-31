@@ -1,0 +1,93 @@
+{% extends 'adminStaff/main.html' %}
+
+
+{% block body_block %}
+
+<script type="text/javascript">
+function sidebarheight()
+      {
+              var x = $(window).height();
+              var y = $('#coursecontent').height();
+              if(x > y)
+              { 
+                 x = x + 50;
+                $('#coursebar').height(x);
+              }
+              else
+              {
+                y = y+50;
+                $('#coursebar').height(y);
+              }
+             
+      }
+      $(document).ready(function(){
+$( window ).resize(function() {
+              //alert("resized");
+                sidebarheight();
+            });
+$( window ).load(function() {
+              //alert("resized");
+                sidebarheight();
+            });
+});
+</script>
+
+<style type="text/css">
+	#coursebar{
+     border-top: 5px solid #555;
+		background-color: #333;
+		padding-top: 75px;
+
+	}
+	#coursebar h3,#coursebar h6,  #coursebar h4 {
+		color: white;
+	}
+</style>
+
+<div class="container">
+	<div class="large-3 columns" id="coursebar">
+		<h3 style="margin-left:20px;">{{course.coursecode}} - {{ course.coursename }}</h3>
+		<h4 style="margin-left:20px;">{{ faculty }}</h4>
+		<h4 style="margin-left:20px;">{{ course_semester }} {{ course.year }}</h4>
+		<h6 style="margin-left:20px;">{{ course.course_description}}</h6>
+		<div class="large-12 columns">
+			<a href=/adminStaff/viewCourse/{{course.pk}} class="button full small">Course Home</a>
+			<a href=/adminStaff/updateMarks/{{course.pk}} class="button full small">Update Marks</a>
+			<a href=/adminStaff/updateAttendance/{{course.pk}} class="button full small">Update Attendance</a>
+		</div>
+	</div>
+	<div class="large-9 columns" id="coursecontent" style="margin-top:75px;margin-bottom:100px !important;">
+		<h4 style="margin-left:20px;">List of current students:</h4>
+			<div class="header container row"> 
+			<table>
+ 	 <thead>
+    <tr>
+      <th>Roll No</th>
+      <th>Full Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if ListofStudents %}     
+      {% for student in ListofStudents %}
+        <tr>
+          <td>{{student.rollno}}</td>
+          {% if student.getStudent %}     
+              <td>{{student.getStudent.name}}</td>   
+          {% else %}
+            <strong>Something went wrong.</strong>
+          {% endif %}
+        </tr>
+      {% endfor %}
+           
+    {% else %}
+        <strong>No students taking this course currently.</strong>
+    {% endif %}
+  </tbody>
+</table>
+		</div>
+      </div>
+
+	</div>
+</div>
+
+{% endblock %}

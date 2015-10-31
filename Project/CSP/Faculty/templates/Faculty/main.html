@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<title>Faculty | Consolidated Student's Portal</title>
+		{% load staticfiles %}
+		<link rel="stylesheet" type="text/css" href="{% static "css/foundation.min.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "css/reports.css" %}">
+		<script type="text/javascript" src="{% static "js/vendor/jquery.js" %}"></script>
+		<script type="text/javascript" src="{% static "js/foundation.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "js/foundation/foundation.reveal.js" %}"></script>
+		<script>
+  	 		$(document).foundation();
+		</script>
+	</head>
+	<body>
+		<nav class="top-bar" data-topbar role="navigation">
+			<ul class="title-area">
+				<li class="name">
+					<h1><a href=/faculty/>{{current.name}}</a></h1>
+				</li>
+				<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+			</ul>
+			<section class="top-bar-section">
+				<ul class="right">
+					<li class="active"><a href=/faculty/>Home</a></li>
+					<li><a href=/faculty/reports/>Reports</a><li>
+					<li id="search_click"><a href="#">Search</a></li>
+					<li><a href=/portal/logout/>Logout</a></li>   
+				</ul>
+			</section>
+		</nav>
+		<div class="container" id="search_bar" style="background-color:#444;">
+			<form action="/faculty/searchResults/" method="post">
+			{% csrf_token %}
+			<div class="row">
+				<div class="large-10 columns">
+					<input style="margin-top:13px;" name="search_input" type="text" placeholder="Search for a Student by Name or Roll Number">
+				</div>
+				<div class="large-2 columns">
+					<input style="margin-top:10px;" class="button small" type="submit" value="Search"/></div>
+				</div>
+			</div>
+		</form>
+		</div>
+		{% block body_block %}{% endblock %}
+		<div class="footer" style="bottom:0px;position:fixed;width: 100%;margin-top:10px;" >
+     <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+      <section class="top-bar-section">
+        <ul class="right">
+	      <li><a href=/student/>Student</a></li>
+	      <li> | </li>
+	      <li><a href=/parents/>Parent</a></li>
+	      <li> | </li>
+	      <li><a href=/adminStaff/>Admin Staff</a></li>
+	      <li> | </li>
+	      <li><a href=/admin/>Admin</a></li>
+	      <li> | </li>
+	      <li><a href=/faculty/>Faculty</a></li>
+	      <li> | </li>
+	      <li><a href=/facultystaff/>Faculty Staff</a></li>
+	      <li> | </li>
+	      <li><a href=/ta/>TA</a></li>
+        </ul> 
+      </section>
+  		</ul>
+    </nav>
+	</div>
+	<script>
+  	 	$(document).foundation();
+	</script>
+	</body>
+</html>

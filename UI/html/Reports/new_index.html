@@ -1,0 +1,371 @@
+<html>
+<head>
+	<title>Reports</title>
+	<link rel="stylesheet" type="text/css" href="../../css/foundation.min.css">
+	<link rel="stylesheet" type="text/css" href="../../css/reports.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/foundation.min.js"></script>
+	<script type="text/javascript" src="../../js/reports.js">
+	</script>
+</head>
+<body>
+	<nav class="top-bar" data-topbar role="navigation">
+	  <ul class="title-area">
+	    <li class="name">
+	      <h1><a href="#">Name</a></h1>
+	    </li>
+	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	  </ul>
+	  <section class="top-bar-section">
+	    <ul class="right">
+	  <li><a href="../Faculty/index.html">Home</a></li>   
+	      <li><a href="../Faculty/courses.html">Courses</a></li>
+	      <li class="active"><a href="#">Reports</a></li>
+	      <li id="search_click"><a href="#">Search</a></li>
+	      <li><a href="#">Logout</a></li>   
+	  </section>
+	</nav>
+	<div class="container" id="search_bar" style="background-color:#444;">
+		<div class="row">
+			<div class="large-10 columns">
+				<input style="margin-top:13px;" type="text" placeholder="Search...">
+			</div>
+				<div class="large-2 columns">
+			<a href="#" style="margin-top:10px;" class="button small">Search</a></div>
+		</div>
+	</div>
+	<div class="container" id="Hide">
+		<div class="large-12 columns filters_div">
+			<h4>Run a Report</h4>
+			<div class="row">
+				    <div class="large-12 columns">
+				    	<select id="maintype">
+				    		<option value="-1">Select one</option>
+				    		<option value="courses">Course</option>
+				    		<option value="semester">Semester</option>
+				    		<option value="career">Career</option>
+				    	</select>
+				    	<fieldset>
+					    	<select id="semester_list">
+					    		<option>Monsoon 2013</option>
+					    		<option>Spring 2013</option>
+					    		<option>Monsoon 2014</option>
+					    	</select>
+				    	</fieldset>
+				    	<fieldset>
+					    	<select id="course_list">
+					    		<option>Course Name 1</option>
+					    		<option>Course Name 2</option>
+					    		<option>Course Name 3</option>
+					    	</select>
+				    	</fieldset>
+				    </div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+					<label id="help">Click any query to remove it.</label>
+				<ul id="ListofQueries" class="inline-list">
+					
+				</ul>
+				<ul id="HiddenListofQueries">
+					
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="large-3 columns">
+					<fieldset>
+					<label>Type</label>
+					<select id="querytype">
+						<option value="0">Select Query Type</option>
+						<option value="batch">Batch</option>
+						<option value="programme">Programme</option>
+						<option value="sgpa">SGPA</option>
+						<option value="cgpa">CGPA</option>
+						<option value="attendance">Attendance</option>
+						<option value="grades">Grades</option>
+						<option value="marks">Marks</option>
+						<option value="timeperiod">Time Period</option>
+					</select>
+					</fieldset>
+				</div>
+				<div class="large-3 columns">
+					<fieldset class="batch filters">
+						<label>Operation</label>
+						<select id="batchInput1">
+							<option value="before">Before</option>
+							<option value="after">After</option>
+							<option value="is">Is</option>
+						</select>
+					</fieldset>
+					<fieldset class="programme filters">
+						<label>Operation</label>
+						<select id="programmeInput1">
+							<option value="is">Is</option>
+						</select>
+					</fieldset>	
+					<fieldset class="timeperiod filters">
+						<label>Operation</label>
+						<select id="timeperiodInput1">
+							<option value="range">Range</option>
+						</select>
+					</fieldset>	
+				</div>
+				<div class="large-6 columns">
+					<fieldset class="batch filters">
+						<label>Input</label>
+						<input id="batchInput2" type="text" placeholder="Year">
+					</fieldset>
+					<fieldset class="timeperiod filters">
+						<label>Input</label>
+						<div class="row">
+							<div class="large-6 columns">
+								<input id="timeperiodInput3" type="text" placeholder="From Semester, ex: Monsoon 2013">
+							</div>
+							<div class="large-6 columns">
+								<input id="timeperiodInput4" type="text" placeholder="To Semester, ex: Monsoon 2013">
+							</div>
+						</div>
+					</fieldset>
+					<fieldset class="programme filters">
+						<label>Input</label>
+						 <select id="programmeInput2">
+					       	  <option selected value="*">any</option>
+					          <option value="CSE">CSE</option>
+					          <option value="CSD">CSD</option>
+					          <option value="ECE">ECE</option>
+					          <option value="ECD">ECD</option>
+					          <option value="CND">CND</option>
+					          <option value="CHD">CHD</option>
+					          <option value="CLD">CLD</option>
+					          <option value="BSD">BSD</option>
+					    </select>
+				    </fieldset>
+				</div>
+				<div class="large-3 columns">
+					<fieldset class="sgpa cgpa attendance grades marks filters">
+						<label>Operation</label>
+						<select id="operationInput">
+						<!-- 	<option value="less than">Less than</option>
+							<option value="greater than">Greater Than</option>
+							<option value="equal to">Equal to</option> -->
+							<option value="between">Range</option>
+						</select>
+					</fieldset>
+				</div>
+				<div class="large-6 columns">
+					<fieldset class="sgpa cgpa filters">
+						<label>Input</label>
+						<div class="row">
+							<div class="large-6 columns" >
+								<label>
+					        		<input id="gpaInput3" type="text" placeholder="Enter a minimum GPA" />
+					      		</label>
+							</div>
+							<div class="large-6 columns" >
+								<label>
+					        		<input id="gpaInput4" type="text" placeholder="Enter a maximum GPA" />
+					      		</label>
+					  		</div>
+				    </fieldset>
+				    <fieldset class="attendance marks filters">
+						<label>Input</label>
+						<div class="row">
+							<div class="large-6 columns" >
+								<div class="row collapse postfix-round">
+						    		<div class="small-9 columns">
+						        		<input id="percentageInput1" type="text" placeholder="Minimum" />
+						    		</div>
+						    		<div class="small-3 columns">
+					        			<a href="#" class="button postfix">%</a>
+						    		</div>
+					 			</div>
+					 		</div>
+							<div class="large-6 columns" >
+					    		<div class="row collapse postfix-round">
+					    			<div class="small-9 columns">
+				            			<input id="percentageInput2" type="text" placeholder="Maximum" />
+				        			</div>
+				        			<div class="small-3 columns">
+					          			<a href="#" class="button postfix">%</a>
+				        			</div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					 <fieldset class="grades filters">
+						<label>Input</label>
+						<div class="row">
+							<div class="large-6 columns" >
+								<label>
+					        		<input id="gradeInput3" type="text" placeholder="Minimum grade" />
+					      		</label>
+							</div>
+							<div class="large-6 columns" >
+								<label>
+					        		<input id="gradeInput4" type="text" placeholder="Maximum grade" />
+					      		</label>
+					  		</div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="large-12 columns">
+					<fieldset class="marks filters">
+						<label>Exam type</label>
+						 <select id="marksInput5">
+					       	  <option selected value="Final">Final</option>
+					          <option value="MidSem1">MidSem1</option>
+					          <option value="MidSem2">MidSem2</option>
+					    </select>
+				    </fieldset>
+				</div>
+				<div class="large-12 columns">
+					<div class="row">
+						<div class="large-6 columns" >
+							<a href="#" class="button full" id="add_query">Add Query</a>
+						</div>
+						<div class="large-6 columns" >
+							<a href="#" class="button full" id="run_query">Run Query(s)</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container table_div">
+		<div class="container" style="margin-top:10px;" id="back_div">
+			<div class="large-12 columns">
+				<div class="container">
+					<div class="large-2 columns">
+						<a href="#" class="button full" id="back_query">Back</a>
+					</div>
+					<div class="large-2 columns">
+						<!-- <label>Email</label>
+						<select>
+							<option value="0">Group</option>
+							<option value="1">Individual</option>
+							<option value="2">Parents</option>
+						</select> -->
+						<a href="#" class="button full" id="email_query">Email</a>
+					</div>
+					<div class="large-2 columns">
+						<a href="#" class="button full" id="back_query">Change Columns</a>
+					</div>
+					<div class="large-2 columns dropdownbu">
+						<label>View</label>
+						<select>
+							<option value="10">10</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>
+					</div>
+					<div class="large-2 columns dropdownbu">
+						<label>Export</label>
+						<select>
+							<option value="0">CSV</option>
+							<option value="0">Excel</option>
+							<option value="1">Word</option>
+							<option value="2">PDF</option>
+						</select>
+					</div>
+					<div class="large-2 columns" >
+						<a href="#" class="button full" id="apply_query">Apply</a>
+					</div>
+					<hr>
+				</div>
+			</div>
+			<div class="large-11 columns">
+				<h4>Query:</h4>
+				<ul id="ListofQueries" class="inline-list">
+					
+				</ul>
+			</div>
+		</div>
+		<div class="large-12 columns">
+			<table>
+				 	<thead>
+					    <tr>
+						    <th>~</th>
+						    <th>Roll No</th>
+						    <th>Full Name</th>
+						    <th>CGPA</th>
+						    <th>Attendance</th>
+						    <th>Branch</th>
+					    </tr>
+					</thead>
+				<tbody>
+				    <tr>
+					    <td><input type="checkbox"></td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+				    </tr>
+				    <tr>
+					    <td><input type="checkbox"></td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+				    </tr>
+				    <tr>
+					    <td><input type="checkbox"></td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+				    </tr>
+				    <tr>
+					 	<td><input type="checkbox"></td>
+					  	<td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+				    </tr>
+				    <tr>
+					    <td><input type="checkbox"></td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+				    </tr>
+				    <tr>
+					    <td><input type="checkbox"></td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+				    </tr>
+				    <tr>
+					    <td><input type="checkbox"></td>
+					   	<td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+					    <td>Filler</td>
+				    </tr>
+			  	</tbody>
+			</table>
+			<div class="pagination-centered">
+				<ul class="pagination">
+				    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+				    <li class="current"><a href="">1</a></li>
+				    <li><a href="">2</a></li>
+				    <li><a href="">3</a></li>
+				    <li><a href="">4</a></li>
+				    <li class="unavailable"><a href="">&hellip;</a></li>
+				    <li><a href="">12</a></li>
+				    <li><a href="">13</a></li>
+				    <li class="arrow"><a href="">&raquo;</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

@@ -1,0 +1,95 @@
+{% extends 'Parents/main.html' %}
+
+
+{% block body_block %}
+<div class="container large-8 columns" id='hide'>
+	<h3> Profile </h3>
+	<form action=/parents/editprofile/ method="post">
+		{% csrf_token %}
+		<div class="row">
+			<div class="large-12 columns">
+				<label>Name
+					<input type="text" name="name" value="{{current.name}}" />
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<label>Student Name
+					<input disabled type="text" value="{{current.getStudent.name}}" />
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<label>Contact Number
+					<input type="text" name="contact_number" value="{{current.contact_no}}" />
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<label>Plot No.
+					<input type="text" name="plot_no" value="{{current.plot_flatno}}" />
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<label>Address Line 1
+					<input type="text" name="addr_line1" value="{{current.addr_line1}}" />
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<label>Address Line 2
+					<input type="text" name="addr_line2" value="{{current.addr_line2}}" />
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-6 columns">
+				<label>City
+					<input type="text" name="city" value="{{current.city}}" />
+				</label>
+			</div>
+			<div class="large-6 columns">
+				<label>State
+					<input type="text" name="state" value="{{current.state}}" />
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-6 columns">
+				<label>Country
+					<input type="text" name="country" value="{{current.country}}" />
+				</label>
+			</div>
+			<div class="large-6 columns">
+				<label>Pincode
+					<input type="text" name="pincode" value="{{current.pincode}}" />
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<div class="row collapse">
+					<label>E-mail</label>
+						<div class="small-12 columns">
+							<input disabled type="text" name="emailid" value="{{current.username}}" />
+						</div>
+						<!-- <div class="small-4 columns">
+							<span class="postfix">@parents.iiit.ac.in</span>
+						</div> -->
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-4 columns">
+				<input class="button full" value="Save" type="submit">
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}

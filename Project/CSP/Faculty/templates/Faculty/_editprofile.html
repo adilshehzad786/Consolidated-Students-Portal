@@ -1,0 +1,89 @@
+{% extends 'faculty/main.html' %}
+
+
+{% block body_block %}
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#search_bar').hide();
+				$('#search_click').click(function(){
+					$('#search_bar').slideToggle();
+				
+				});
+			});
+
+			$(document).ready(function(){
+				$("#course_list").click(function(){
+	    			$("#Courses").append("<li>input</li>");
+	  			});
+
+			});
+		</script>
+<div class="row" style="margin-top:100px;">
+	<div class= "large-6 columns">
+		<form action=/faculty/editProfile/ method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+		{% if current.username.photo %}
+		 <img src="{{ current.username.photo.url }}" height="420">
+		{% else %}
+		<img src="http://blogs.kqed.org/education/files/2011/06/facebook_blank_face3.jpeg">
+		{% endif %}
+		<div class="row">
+			<div class="large-12 columns" style="margin-top:20px;">
+				<input type="file" name="picture" class="tiny button">
+				<!-- <button id="upload" class="drop-area">
+					Upload Picture
+				</button> -->
+			</div>
+		</div>
+	</div>
+	<div class="container large-6 columns" id='hide'>
+		<h3> Profile </h3>
+			<div class="row">
+				<div class="large-12 columns">
+					<label>Name
+						<input name="name" value="{{current.name}}" type="text" placeholder="Name" disabled/>
+					</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+					<label>Office No
+						<input name="officeno" value="{{current.officeno}}" type="text" placeholder="Office Location" />
+					</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+					<label>Office Building No
+						<input name="buildingno" value="{{current.buildingno}}" type="text" placeholder="Office Location" />
+					</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+					<div class="row collapse">
+						<label>E-mail</label>
+							<div class="small-8 columns">
+								<input type="text" name="prefix" value="{{emailprefix}}" placeholder="E-mail" disabled/>
+							</div>
+							<div class="small-1 columns">
+								<span class="postfix">@</span>
+							</div>
+							<div class="small-3 columns">
+								<input name="suffix" value="{{emailsuffix}}" type="text" placeholder="suffix" disabled/>
+							</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+					<input class="button expand" type="submit" class="Submit" value="Submit">
+				</div>
+				<!-- <div class="large-6 columns">
+					<a role="button" class="button expand" aria-label="submit form" href="#" class="Submit">Edit</a>
+				</div> -->
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}

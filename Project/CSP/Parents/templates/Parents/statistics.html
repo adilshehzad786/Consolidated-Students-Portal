@@ -1,0 +1,77 @@
+{% extends 'Parents/main.html' %}
+
+
+{% block body_block %}
+<div class="large-8 medium-8 columns" style="position: relative; top:20px;">
+<!-- <a>* This is basically the statistics page for the parent's portal. It consists of statistics and comparisons of student's performance in terms of grades and attendance.</a><br> -->
+<div class="container">
+	{% load staticfiles %}
+   	<script type="text/javascript" src="{% static "js/Chart.js" %}"></script>
+	<script type="text/javascript">
+		var pieData1 = [
+			{% for cgpa,color1,color2,label in cgpalist1 %}
+				{
+					value: {{cgpa}},
+					color: "{{color1}}",
+					highlight: "{{color2}}",
+					label: "{{label}}"
+				},
+			{% endfor %}
+			];
+
+			// window.onload = function(){
+			// 	var ctx1 = document.getElementById("chart-area1").getContext("2d");
+			// 	window.myPie1 = new Chart(ctx1).Pie(pieData1,{
+				
+			// 	});
+			// };
+		var pieData2 = [
+			{% for cgpa,color1,color2,label in cgpalist2 %}
+				{
+					value: {{cgpa}},
+					color: "{{color1}}",
+					highlight: "{{color2}}",
+					label: "{{label}}"
+				},
+			{% endfor %}
+			];
+
+			window.onload = function(){
+				var ctx1 = document.getElementById("chart-area1").getContext("2d");
+				window.myPie1 = new Chart(ctx1).Pie(pieData1,{});
+				var ctx2 = document.getElementById("chart-area2").getContext("2d");
+				window.myPie2 = new Chart(ctx2).Pie(pieData2,{
+				
+				});
+			};
+
+	</script>
+	<div id="canvas-holder1" class="row">
+		<h5>Student distribution by CGPA for the Batch {{current.getStudent.batch}}</h5>
+		<div class="large-4 columns">
+			<ul id="legend" style="list-style-type:none;margin-left:-10px;">
+				{% for cgpa,color1,color2,label in cgpalist1 %}
+					<li><div style="height:20px;width:20px;background-color:{{color1}}"></div> {{label}}</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="large-8 columns">
+			<canvas id="chart-area1" width="270" height="270"/>
+		</div>
+	</div>
+	<div id="canvas-holder2" class="row">
+		<h5>Student distribution by CGPA for the Batch {{current.getStudent.batch}} and Branch {{current.getStudent.programme}}</h5>
+		<div class="large-4 columns">
+			<ul id="legend" style="list-style-type:none;margin-left:-10px;">
+				{% for cgpa,color1,color2,label in cgpalist2 %}
+					<li><div style="height:20px;width:20px;background-color:{{color1}}"></div> {{label}}</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="large-8 columns">
+			<canvas id="chart-area2" width="270" height="270"/>
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}

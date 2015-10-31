@@ -1,0 +1,27 @@
+{% extends 'Parents/main.html' %}
+
+
+{% block body_block %}
+        <div class="large-8 medium-8 columns" style="position: relative; top:75px;">
+          <div class =" t1">
+            <table style="width:100%;margin-top:0px" align="center">
+              <thead>
+                <th><a href="#"> Subject </a></th>
+                  <th><a href="#"> Day Absent </th>
+              </thead>
+              <tbody>
+                {% if dailyAttendance %}     
+                      {% for row in dailyAttendance %}
+                          <tr>
+                    <td>{{ row.coursecode.coursename}} </td>
+                    <td>{{ row.date }}</td>
+                  </tr>
+                      {% endfor %}
+                    {% else %}
+                         <strong>Daily Attendance not available</strong>
+                  {% endif %}    
+              </tbody>
+            </table>
+          </div>
+        </div>
+{% endblock %}

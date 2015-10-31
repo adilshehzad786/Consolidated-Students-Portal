@@ -1,0 +1,36 @@
+{% extends 'ta/main.html' %}
+
+
+{% block body_block %}
+      <h4 style="margin-left:20px;">List of current students:</h4>
+      <div class="header container row"> 
+      <table>
+   <thead>
+    <tr>
+      <th>Roll No</th>
+      <th>Full Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if ListofStudents %}     
+      {% for student in ListofStudents %}
+        <tr>
+          <td>{{student.rollno}}</td>
+          {% if student.getStudent %}     
+              <td>{{student.getStudent.name}}</td>   
+          {% else %}
+            <strong>Something went wrong.</strong>
+          {% endif %}
+        </tr>
+      {% endfor %}
+           
+    {% else %}
+        <strong>No students taking this course currently.</strong>
+    {% endif %}
+  </tbody>
+</table>
+    </div>
+      </div>
+
+  </div>
+{% endblock %}

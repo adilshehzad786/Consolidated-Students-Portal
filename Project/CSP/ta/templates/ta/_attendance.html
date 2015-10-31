@@ -1,0 +1,318 @@
+{% extends 'ta/main.html' %}
+
+
+{% block body_block %}
+    <div class="row" style="margin-bottom:80px !important;">
+  <div class="columns large-3" style="margin-top:25%;"> 
+      <!-- <a href="#" class="button full small">Add New</a> -->
+        <button id="upload" class="drop-area button full small" data-reveal-id="myModalEmail" >
+        Upload Attendance
+        </button>
+    </div>
+  <div class="columns large-9"> 
+    <div class="large-12 columns">
+      <form action=/ta/updateAttendance/{{course.id}}/ method="post">
+         {% csrf_token %}
+        <div class="row">
+           <div class="large-12 columns">
+            <h4>
+                Displaying data for: <span id="display"></span>
+            </h4>
+            <div class="row collapse">
+               <div class="small-10 columns">
+                <script type="text/javascript">
+                  $(document).ready(function(){
+                    L = '{{selectValue.start_date}}';
+                    K = '{{selectValue.end_date}}';
+                    $( "#display" ).append(L);
+                    $( "#display" ).append(" - "); 
+                    $( "#display" ).append(K);
+                  });
+                  $(document).ready(function(){
+                    $('.edit').hide();
+                  $('#edit').click(function(){
+                            $('.view').toggle();
+                            $('.edit').toggle();
+
+                          });
+                              });
+                </script>
+                  <select id="do" name="periods" value={{selectValue}}>
+                   <option value="0">{% if selectValue %} {{selectValue.start_date}} - {{selectValue.end_date}} {% else %} All  {% endif %}</option>
+                     <option>-----------</option>
+                   {% if ListofStudents %}     
+                     {% for total in totalList %}
+                        <option value={{total.id}}>{{total.start_date}} - {{total.end_date}}</option>
+                     {% endfor %}
+                   {% endif %}
+                 </select>
+               </div>
+               <div class="small-2 columns">
+                 <input value="Change" class="button postfix" type="submit"/>
+               </div>
+             </div>
+           </div>
+         </div>
+        </form>
+      <table id="Attendance">
+   <thead>
+    <tr>
+      <th>Roll No</th>
+      <th>Full Name</th>
+      <th>Days Present</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% if ListofStudents %}     
+      {% for student,attendance in ListofStudents %}
+        <tr>
+          <td>{{student.rollno}}</td>
+          <td> {{student.getStudent.name}}</td>
+          <td>
+            <span class="view">{{ attendance }}</span>
+            <span class="edit"><input value="{{ attendance }}" name="A[]"></span>
+          </td>
+          <td>
+            <span class="view">{{ total }}</span>
+            <span class="edit"><input value="{{ total }}" name="T[]"></span>
+          </td>
+        </tr>
+      {% endfor %}
+           
+    {% else %}
+        <strong>No students taking this course currently.</strong>
+    {% endif %}
+  </tbody>
+</table>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div id="myModalEmail" class="reveal-modal xlarge" data-reveal="">
+   <form action=/ta/uploadSeatingChart/{{course.id}}/ method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+      <thead>
+        <th>~</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>6</th>
+        <th>7</th>
+        <th>8</th>
+        <th>9</th>
+        <th>10</th>
+        <th>11</th>
+        <th>12</th>
+        <th>13</th>
+        <th>14</th>
+        <th>15</th>
+        <th>16</th>
+        <th>17</th>
+        <th>18</th>
+        <th>19</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A</td>
+          <td></td>
+          <td></td>
+          <td><input type="checkbox" value="A1" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A2" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A3" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A4" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A5" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A6" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A7" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A8" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A9" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A10" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A11" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A12" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A13" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A14" name="SD[]" checked></td>
+          <td><input type="checkbox" value="A15" name="SD[]" checked></td>
+          <td></td>
+          <td></td>
+        </tr>
+         <tr>
+          <td>B</td>
+          <td><input type="checkbox" value="B1" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B2" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B3" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B4" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B5" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B6" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B7" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B8" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B9" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B10" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B11" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B12" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B13" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B14" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B15" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B16" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B17" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B18" name="SD[]" checked></td>
+          <td><input type="checkbox" value="B19" name="SD[]" checked></td>
+        </tr>
+        <tr>
+          <td>C</td>
+          <td><input type="checkbox" value="C1" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C2" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C3" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C4" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C5" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C6" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C7" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C8" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C9" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C10" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C11" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C12" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C13" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C14" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C15" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C16" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C17" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C18" name="SD[]" checked></td>
+          <td><input type="checkbox" value="C19" name="SD[]" checked></td>
+        </tr>
+        <tr>
+          <td>D</td>
+          <td><input type="checkbox" value="D1" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D2" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D3" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D4" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D5" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D6" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D7" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D8" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D9" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D10" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D11" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D12" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D13" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D14" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D15" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D16" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D17" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D18" name="SD[]" checked></td>
+          <td><input type="checkbox" value="D19" name="SD[]" checked></td>
+        </tr>
+        <tr>
+          <td>E</td>
+          <td><input type="checkbox" value="E1" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E2" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E3" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E4" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E5" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E6" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E7" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E8" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E9" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E10" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E11" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E12" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E13" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E14" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E15" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E16" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E17" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E18" name="SD[]" checked></td>
+          <td><input type="checkbox" value="E19" name="SD[]" checked></td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td><input type="checkbox" value="F1" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F2" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F3" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F4" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F5" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F6" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F7" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F8" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F9" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F10" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F11" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F12" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F13" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F14" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F15" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F16" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F17" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F18" name="SD[]" checked></td>
+          <td><input type="checkbox" value="F19" name="SD[]" checked></td>
+        </tr>
+        <tr>
+          <td>G</td>
+          <td><input type="checkbox" value="G1" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G2" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G3" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G4" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G5" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G6" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G7" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G8" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G9" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G10" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G11" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G12" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G13" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G14" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G15" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G16" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G17" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G18" name="SD[]" checked></td>
+          <td><input type="checkbox" value="G19" name="SD[]" checked></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="large-5 columns">
+        <label> Input Date
+          <input type="text" name="dateOfAttendance" style="margin-top:8px;" placeholder="Date DD/MM/YYYY">
+        </label>
+      </div>
+       <div class="large-5 columns">
+        <label> Upload Seating Chart
+          <input   type = "file" name="seating">
+        </label>
+      </div>
+      <div class="large-2 columns">
+        <label> <p></p>
+          <button class=" tiny button" style="width:100%;">Submit</button>
+        </label>
+      </div>
+      </form>
+        <hr>
+      <form action=/ta/processUploadAttendance/{{course.id}}/ method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="large-5 columns">
+        <label>Or Upload a file for attendance
+          <input name="date1" type="text" style="margin-top:8px;" placeholder="Date DD/MM/YYYY">
+        </label>
+      </div> 
+        <div class="large-5 columns">
+          <label style="margin-top:8px;">Upload a file for attendance
+    <p>
+        {{ form1.docfile.errors }}
+        {{ form1.docfile }}
+      </p>
+  </label>
+        </div>
+         <div class="large-2 columns">
+          <input class="tiny button" type="submit" style="width:100%;" value="Upload">
+        </div>
+      </div>
+    <a class="close-reveal-modal">&#215;</a>
+  </form>
+</div> 
+
+{% endblock %}
